@@ -1,5 +1,6 @@
 module BetaReader
 
-greet() = print("Hello World!")
+include("Main.jl")
 
+export greet
 end # module
