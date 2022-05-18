@@ -51,7 +51,7 @@ end
 
 function isSigmaTerminator(c)
     sigmaTerms = """,.":;— \t\n"""
-    if (contains(sigmaTerms, c)) true
+    if (contains(sigmaTerms, c   )) true
     else false
     end
 end
