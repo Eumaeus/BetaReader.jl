@@ -24,6 +24,14 @@
 @test BetaReader.isAccent("=")
 @test_broken BetaReader.isAccent("(")
 
+@test BetaReader.isDiacritical("=")
+
+@test BetaReader.isConsonant("s")
+@test BetaReader.isConsonant("b")
+@test BetaReader.isConsonant("c")
+@test BetaReader.isConsonant("t")
+@test BetaReader.isConsonant("x")
+
 @test BetaReader.isIotaSubscript("|")
 @test BetaReader.isDiaeresis("+")
 
@@ -39,4 +47,37 @@
 @test_broken BetaReader.isDiphthong("Io")
 
 @test BetaReader.isSigmaTerminator(" ")
+
+@test BetaReader.isUC("A")
+@test BetaReader.isUC("B")
+@test BetaReader.isUC("G")
+@test BetaReader.isUC("D")
+@test BetaReader.isUC("E")
+@test BetaReader.isUC("Z")
+@test BetaReader.isUC("H")
+@test BetaReader.isUC("Q")
+@test BetaReader.isUC("I")
+
+@test_broken BetaReader.isUC("a")
+@test_broken BetaReader.isUC("b")
+@test_broken BetaReader.isUC("c")
+@test_broken BetaReader.isUC("=")
+@test_broken BetaReader.isUC(".")
+
+
+@test get(BetaReader.bigLookup,"b","#") == "β"
+@test get(BetaReader.bigLookup,"g","#") == "γ"
+@test get(BetaReader.bigLookup,"&","#") == "#"
+
+@test BetaReader.transcode("mh=nin") == "μῆνιν"
+@test BetaReader.transcode("Mh=nin") == "Μῆνιν"
+@test BetaReader.transcode("a)/eide") == "ἄειδε"
+@test BetaReader.transcode("qea/") == "θεά"
+@test BetaReader.transcode("Phlhi+a/dew") == "Πηληϊάδεω"
+@test BetaReader.transcode("A)xilh=os") == "Ἀχιλῆος"
+@test BetaReader.transcode("*phlhi+a/dew") == "Πηληϊάδεω"
+@test BetaReader.transcode("*a)xilh=os") == "Ἀχιλῆος"
+
+
 end
+
