@@ -79,5 +79,13 @@
 @test BetaReader.transcode("*a)xilh=os") == "Ἀχιλῆος"
 
 
+@test BetaReader.transcode("*a)xilh=os\nou)lome/nhn") == "Ἀχιλῆος\nοὐλομένην"
+@test BetaReader.transcode("ou)lome/nhn, h(\\ muri/'") == "οὐλομένην, ἣ μυρί\u0039"
+@test BetaReader.transcode("a)/lge' e)/qhke,") == "ἄλγε\u0039 ἔθηκε,"
+@test BetaReader.transcode("di=os A)xilleu/s.") == "δῖος Ἀχιλλεύς."
+@test BetaReader.transcode("cune/hke ma/xesqai;") == "ξυνέηκε μάχεσθαι;"
+@test BetaReader.transcode("ma/xesqai") == "μάχεσθαι"
+
+
 end
 
