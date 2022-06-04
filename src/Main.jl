@@ -213,43 +213,18 @@ function transcode(s)
     Unicode.normalize(preString, :NFKC)
 end
 
-
-
-
 #=
+"Generate a Markdown table showing all valid vowels"
+function printVowels()
+    header = """##Valid Vowels##\n\n| Greek Character | Beta-Code |\n|-----------------|-----------|"""
 
-Send string in with empty "result" and empty "accum"
+    justVowels = collect(filter(k -> isVowel(k.first), bigLookup))
 
+    for (g, b) in justVowels
+        newLine = "\n| $g | $b |"
+        vowelMd = vowelMd * newLine
+    end        
+    vowelMd
 
-"accumulate" function: is the string-param empty?
-        return "result"
-
-otherwise pop the first character
-
-is it a vowel?
-    look at the next character
-    is it a letter or punctuation?
-        translate the vowel, add it to "result" and iterate with empty "accum"
-    is it a diacritical? 
-        add vowel to "accum" and iterate, keeping "result"
-is it a diacritical?
-    look at the next character
-    is it another diacritical?
-        add diacritical to "accum" and iterate, keeping "result"
-    is it an alphabetic or punctuation?
-        translate "accum" + popped char,
-            add to "result" and iterate with empty "accum"
-is it a punctuation?
-    translate, if necessary, add to "result" and iterate with empty "accum"
-is it a consonant?
-    is it an "s"?
-        look at the next character, translate appropriately, add to "result" and iterate with empty "accum"
-    if not an "s", 
-        translate, add to "result" and iterate with empty "accum"
-
-
-is it not a vowel?
-
-
-
+end
 =#

@@ -18,11 +18,11 @@
 
  @test BetaReader.isBreathing("(")
  @test BetaReader.isBreathing(")")
- @test_broken BetaReader.isBreathing("a")
+ @test BetaReader.isBreathing("a") == false
 @test BetaReader.isAccent("/")
 @test BetaReader.isAccent("\\")
 @test BetaReader.isAccent("=")
-@test_broken BetaReader.isAccent("(")
+@test BetaReader.isAccent("(") == false
 
 @test BetaReader.isDiacritical("=")
 
@@ -38,13 +38,13 @@
 @test BetaReader.isDiphthong("ai")
 @test BetaReader.isDiphthong("ei")
 @test BetaReader.isDiphthong("ou")
-@test_broken BetaReader.isDiphthong("hi")
-@test_broken BetaReader.isDiphthong("io")
+@test BetaReader.isDiphthong("hi") == false
+@test BetaReader.isDiphthong("io") == false
 @test BetaReader.isDiphthong("Ai")
 @test BetaReader.isDiphthong("Ei")
 @test BetaReader.isDiphthong("Ou")
-@test_broken BetaReader.isDiphthong("Hi")
-@test_broken BetaReader.isDiphthong("Io")
+@test BetaReader.isDiphthong("Hi") == false
+@test BetaReader.isDiphthong("Io") == false
 
 @test BetaReader.isSigmaTerminator(" ")
 
@@ -58,11 +58,11 @@
 @test BetaReader.isUC("Q")
 @test BetaReader.isUC("I")
 
-@test_broken BetaReader.isUC("a")
-@test_broken BetaReader.isUC("b")
-@test_broken BetaReader.isUC("c")
-@test_broken BetaReader.isUC("=")
-@test_broken BetaReader.isUC(".")
+@test BetaReader.isUC("a") == false
+@test BetaReader.isUC("b") == false
+@test BetaReader.isUC("c") == false
+@test BetaReader.isUC("=") == false
+@test BetaReader.isUC(".") == false
 
 
 @test get(BetaReader.bigLookup,"b","#") == "β"
