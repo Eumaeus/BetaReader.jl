@@ -1,3 +1,4 @@
+"This is the main table of correspondances."
 bigLookup = Dict([
     ("b" => "β")
     ("g" => "γ")
@@ -42,6 +43,9 @@ bigLookup = Dict([
     (":" => ":")
     (";" => ";")
     ("'" => "\u0039")
+    ("?" => "\u0323")
+    ("\"" => "\"")
+    ("-" => "-")
 ])
 
 

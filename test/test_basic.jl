@@ -85,6 +85,8 @@
 @test BetaReader.transcode("di=os A)xilleu/s.") == "δῖος Ἀχιλλεύς."
 @test BetaReader.transcode("cune/hke ma/xesqai;") == "ξυνέηκε μάχεσθαι;"
 @test BetaReader.transcode("ma/xesqai") == "μάχεσθαι"
+@test BetaReader.transcode(""""di=os" A)xilleu/s.""") == """"δῖος" Ἀχιλλεύς."""
+@test BetaReader.transcode("di=o?s A)xilleu/s.") == "δῖο\u0323ς Ἀχιλλεύς."
 
 
 end
