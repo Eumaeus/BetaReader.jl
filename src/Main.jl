@@ -22,18 +22,28 @@ function isNumber(c)
     end
 end
 
-"Returns `true ` if a given character is an editorial sign."
+
+"Returns `true ` if a given character is an editorial mark or critical sign."
 function isEditorial(c)
-    signs = "\u02b9\u03DF\u03DB\u03D9\u03DE\u03E1\u2E0F\u2E10\u0301\u03FD\u03FF\u2014\u203B\u2E16\u003E\u03FE\u002F\u003C\u0300\u205D"
+    editorial = [ "#6"  , "#8"  , "#9"  , "#10" , "#11" , "#12" , "#13" , "#14" , "#15" , "#16" , "#17" , "#18" , "#19" , "#53", "?" ] 
     if (c == "") false
-    elseif (contains(signs, c))
+    elseif (c in editorial)
         true
     else
         false
     end
 end
 
-
+"Returns `true ` if a given character is an archaic form."
+function isArchaic(c)
+    archaic = ["#1","#2","#3","#4","#5"]
+    if (c == "") false
+    elseif (c in archaic)
+        true
+    else
+        false
+    end
+end
 
 "Returns `true ` if a given character is a beta-code acute, grave, *or* circumflex."
 function isAccent(c)
@@ -76,9 +86,9 @@ end
 
 "Returns `true ` if a given character is a beta-code version of any punctuation mark."
 function isPunctuation(c)
-    puncts = """,."';[]-—: """
-    if (contains(puncts,c)) true
-    elseif (c == "") false
+    puncts = """,."';[]-—: #"""
+    if (c == "") false
+    elseif (contains(puncts,c)) true
     else false
     end
 end

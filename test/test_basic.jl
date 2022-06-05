@@ -49,9 +49,13 @@
 @test BetaReader.isConsonant("c")
 @test BetaReader.isConsonant("t")
 @test BetaReader.isConsonant("x")
+@test BetaReader.isConsonant("") == false
+
 
 @test BetaReader.isIotaSubscript("|")
 @test BetaReader.isDiaeresis("+")
+@test BetaReader.isIotaSubscript("") == false
+@test BetaReader.isDiaeresis("") == false
 
 @test BetaReader.isDiphthong("ai")
 @test BetaReader.isDiphthong("ei")
@@ -63,8 +67,12 @@
 @test BetaReader.isDiphthong("Ou")
 @test BetaReader.isDiphthong("Hi") == false
 @test BetaReader.isDiphthong("Io") == false
+@test BetaReader.isDiphthong("") == false
 
 @test BetaReader.isSigmaTerminator(" ")
+@test BetaReader.isSigmaTerminator(",")
+@test BetaReader.isSigmaTerminator(":")
+@test BetaReader.isSigmaTerminator("")
 
 @test BetaReader.isUC("A")
 @test BetaReader.isUC("B")
@@ -75,6 +83,7 @@
 @test BetaReader.isUC("H")
 @test BetaReader.isUC("Q")
 @test BetaReader.isUC("I")
+@test BetaReader.isUC("") == false
 
 @test BetaReader.isUC("a") == false
 @test BetaReader.isUC("b") == false
@@ -86,6 +95,7 @@
 @test get(BetaReader.bigLookup,"b","#") == "β"
 @test get(BetaReader.bigLookup,"g","#") == "γ"
 @test get(BetaReader.bigLookup,"&","#") == "#"
+@test get(BetaReader.bigLookup,"","#") == "#"
 
 @test BetaReader.transcodeGreek("mh=nin") == "μῆνιν"
 @test BetaReader.transcodeGreek("Mh=nin") == "Μῆνιν"
@@ -95,6 +105,7 @@
 @test BetaReader.transcodeGreek("A)xilh=os") == "Ἀχιλῆος"
 @test BetaReader.transcodeGreek("*phlhi+a/dew") == "Πηληϊάδεω"
 @test BetaReader.transcodeGreek("*a)xilh=os") == "Ἀχιλῆος"
+@test BetaReader.transcodeGreek("") == ""
 
 
 @test BetaReader.transcodeGreek("*a)xilh=os\nou)lome/nhn") == "Ἀχιλῆος\nοὐλομένην"
@@ -109,6 +120,14 @@
 # Test upper-casing
 @test BetaReader.transcodeGreek("*sigma") == "Σιγμα"
 @test BetaReader.transcodeGreek("Sigma") == "Σιγμα"
+
+# Test checking for punctuation
+@test BetaReader.isPunctuation(".")
+@test BetaReader.isPunctuation(",")
+@test BetaReader.isPunctuation(":")
+@test BetaReader.isPunctuation("#")
+@test BetaReader.isPunctuation("a") == false
+@test BetaReader.isPunctuation("") == false
 
 
 # Test export
@@ -143,13 +162,36 @@
 @test transcodeGreek("#19 b") == "\u0300 β" # ◌̂ Combining Grave Accent → editorial
 @test transcodeGreek("#53 b") == "\u205D β" #  ⁝ tricolon
 
-@test BetaReader.isEditorial("\u203B")
-@test BetaReader.isEditorial("\u002F")
+# Test checking for archaic forms
+
+@test BetaReader.isArchaic("#1")
+@test BetaReader.isArchaic("#2")
+@test BetaReader.isArchaic("#3")
+@test BetaReader.isArchaic("#4")
+@test BetaReader.isArchaic("#5")
+@test BetaReader.isArchaic("") == false
+@test BetaReader.isArchaic("#9") == false
+@test BetaReader.isArchaic("#11") == false
+@test BetaReader.isArchaic("#12") == false
+
+# Test checking for editorial/critical signs
+
+@test BetaReader.isEditorial("#13")
+@test BetaReader.isEditorial("#14")
+@test BetaReader.isEditorial("#15")
+@test BetaReader.isEditorial("#16")
+@test BetaReader.isEditorial("#17")
+@test BetaReader.isEditorial("#18")
+@test BetaReader.isEditorial("#19")
+@test BetaReader.isEditorial("#53")
+@test BetaReader.isEditorial("#53")
+@test BetaReader.isEditorial("#11")
+@test BetaReader.isEditorial("?")
 @test BetaReader.isEditorial("a") == false
 @test BetaReader.isEditorial(":") == false
-
-
-
+@test BetaReader.isEditorial("") == false
+@test BetaReader.isEditorial("#") == false
+@test BetaReader.isEditorial("*") == false
 
 
 
