@@ -161,6 +161,13 @@
 @test transcodeGreek("#18 b") == "\u003C β" # < Less-Than Sign ‣ Reversed Diple
 @test transcodeGreek("#19 b") == "\u0300 β" # ◌̂ Combining Grave Accent → editorial
 @test transcodeGreek("#53 b") == "\u205D β" #  ⁝ tricolon
+@test transcodeGreek("#150 b") == "\u221E β" # infinity
+
+@test transcodeGreek("% b") == "\u2020 β" #  † dagger/crux
+@test transcodeGreek("%13 b") == "\u2021 β" #  ‡ double-dagger
+@test transcodeGreek("%158 b") == "\u2042 β" #  ⁂ asterism
+@test transcodeGreek("%163 b") == "\u00B6 β" # ¶ paragraph sign
+
 
 # Test checking for archaic forms
 
@@ -192,6 +199,7 @@
 @test BetaReader.isEditorial("") == false
 @test BetaReader.isEditorial("#") == false
 @test BetaReader.isEditorial("*") == false
+
 
 
 

@@ -83,6 +83,12 @@ bigLookup = Dict([
     ("#18" => "\u003C") # < Less-Than Sign ‣ Reversed Diple
     ("#19" => "\u0300") # ◌̂ Combining Grave Accent → editorial
     ("#53" => "\u205D") #  ⁝ tricolon
+    ("#150" => "\u221E") # ∞ infinity
+    ("%" => "\u2020") #  † dagger/crux
+    ("%13" => "\u2021") #  ‡ double-dagger
+    ("%158" => "\u2042") #  ⁂ asterism
+    ("%163" => "\u00B6") # ¶ paragraph sign
+
 
 
 

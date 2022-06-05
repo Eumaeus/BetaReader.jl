@@ -25,7 +25,7 @@ end
 
 "Returns `true ` if a given character is an editorial mark or critical sign."
 function isEditorial(c)
-    editorial = [ "#6"  , "#8"  , "#9"  , "#10" , "#11" , "#12" , "#13" , "#14" , "#15" , "#16" , "#17" , "#18" , "#19" , "#53", "?" ] 
+    editorial = [ "#6"  , "#8"  , "#9"  , "#10" , "#11" , "#12" , "#13" , "#14" , "#15" , "#16" , "#17" , "#18" , "#19" , "#53", "?", "%", "%13", "%158", "%163" ] 
     if (c == "") false
     elseif (c in editorial)
         true
@@ -248,6 +248,7 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
                 # Iterate
                 accumulate(join(charVec),newAcc,newAcc)
             end
+
         # Handle the `*` form of upper-case letters
         elseif (isUCMarker(firstChar)) 
             # Asterisk as a stand-alone character is not valid.
@@ -259,6 +260,7 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
             else
                 accumulate(join(charVec), acc, ret, true)
             end
+
         # Handle the "#" codes, for funky letters and critical signs
         elseif (firstChar == "#")
             if (isNumber(secondChar) == false) # resolve "#" alone
@@ -283,27 +285,72 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
                     accumulate(join(charVec),newAcc,newAcc, false)
                 else
                     if (isNumber(fourthChar) == false ) # resolve "#" + secondChar + thirdChar
-                        popfirst!(charVec) # get rid of the next char
-                        popfirst!(charVec) # get rid of the next char
+                        popfirst!(charVec) # get rid of secondChar
+                        popfirst!(charVec) # get rid of thirdChar
                         resolvedChar = begin
-                        if (upperCaseThisOne) uppercase(resolve("#" * secondChar * thirdChar))
-                        else resolve("#" * secondChar * thirdChar)
+                            if (upperCaseThisOne) uppercase(resolve("#" * secondChar * thirdChar))
+                                else resolve("#" * secondChar * thirdChar)
+                            end
                         end
-                    end
-                    newAcc = acc * resolvedChar
-                    # Iterate
-                    accumulate(join(charVec),newAcc,newAcc, false)
+                        newAcc = acc * resolvedChar
                         # Iterate
                         accumulate(join(charVec),newAcc,newAcc, false)
                     else # resolve "#" + secondChar + thirdChar + fourthChar
-                        #popfirst!(charVec) # get rid of the next char
-                        #popfirst!(charVec) # get rid of the next char
+                        popfirst!(charVec) # get rid of the next char
+                        popfirst!(charVec) # get rid of the next char
+                        popfirst!(charVec) # get rid of the next char
                         newAcc = acc * resolve("#" * secondChar * thirdChar * fourthChar)
                         # Iterate
                         accumulate(join(charVec),newAcc,newAcc, false)
                     end
                 end
             end
+
+        # Handle the "%" codes, for funky letters and critical signs
+        elseif (firstChar == "%")
+            if (isNumber(secondChar) == false) # resolve "%" alone
+                newAcc = acc * resolve(firstChar)
+                if (length(charVec) < 1) 
+                    newAcc # resolve and return!
+                else
+                    # Iterate
+                    accumulate(join(charVec),newAcc,newAcc, upperCaseThisOne)
+                end
+            else
+                if (isNumber(thirdChar) == false) # resolve "%" * secondChar
+                    if (thirdChar != "") popfirst!(charVec) # get rid of the next char
+                    end
+                    resolvedChar = begin
+                        if (upperCaseThisOne) uppercase(resolve("%" * secondChar))
+                        else resolve("%" * secondChar)
+                        end
+                    end
+                    newAcc = acc * resolvedChar
+                    # Iterate
+                    accumulate(join(charVec),newAcc,newAcc, false)
+                else
+                    if (isNumber(fourthChar) == false ) # resolve "%" + secondChar + thirdChar
+                        popfirst!(charVec) # get rid of secondChar
+                        popfirst!(charVec) # get rid of thirdChar
+                        resolvedChar = begin
+                            if (upperCaseThisOne) uppercase(resolve("%" * secondChar * thirdChar))
+                                else resolve("%" * secondChar * thirdChar)
+                            end
+                        end
+                        newAcc = acc * resolvedChar
+                        # Iterate
+                        accumulate(join(charVec),newAcc,newAcc, false)
+                    else # resolve "%" + secondChar + thirdChar + fourthChar
+                        popfirst!(charVec) # get rid of the next char
+                        popfirst!(charVec) # get rid of the next char
+                        popfirst!(charVec) # get rid of the next char
+                        newAcc = acc * resolve("%" * secondChar * thirdChar * fourthChar)
+                        # Iterate
+                        accumulate(join(charVec),newAcc,newAcc, false)
+                    end
+                end
+            end
+
 
         elseif (isUC(firstChar))
             # Rather than having a lookup dictionary twice as long as needed, we use our functions, and the affordances of `Unicode` to work around it.
