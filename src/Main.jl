@@ -3,17 +3,43 @@
 "Returns `true ` if a given character is a beta-code breathing."
 function isBreathing(c)
     breathings = "()"
-    if (contains(breathings, c))
+    if (c == "") false
+    elseif (contains(breathings, c))
         true
     else
         false
     end
 end
 
+"Returns `true ` if a given character is an Arabic numeral."
+function isNumber(c)
+    numbers = "0123456789"
+    if (c == "") false
+    elseif (contains(numbers, c))
+        true
+    else
+        false
+    end
+end
+
+"Returns `true ` if a given character is an editorial sign."
+function isEditorial(c)
+    signs = "\u02b9\u03DF\u03DB\u03D9\u03DE\u03E1\u2E0F\u2E10\u0301\u03FD\u03FF\u2014\u203B\u2E16\u003E\u03FE\u002F\u003C\u0300\u205D"
+    if (c == "") false
+    elseif (contains(signs, c))
+        true
+    else
+        false
+    end
+end
+
+
+
 "Returns `true ` if a given character is a beta-code acute, grave, *or* circumflex."
 function isAccent(c)
     accents = "/\\="
-    if (contains(accents, c))
+    if (c == "") false
+    elseif (contains(accents, c))
         true
     else
         false
@@ -22,21 +48,24 @@ end
 
 "Returns `true ` if a given character is a beta-code iota-subscript."
 function isIotaSubscript(c)
-    if (c == "|") true
+    if (c == "") false
+    elseif (c == "|") true
     else false
     end
 end
 
 "Returns `true ` if a given character is a beta-code diaeresis."
 function isDiaeresis(c)
-    if (c == "+") true
+    if (c == "") false
+    elseif (c == "+") true
     else false
     end
 end
 
 "Returns `true ` if a given character is a beta-code version of any diacritical mark."
 function isDiacritical(c)
-    if isAccent(c) true
+    if (c == "") false
+    elseif isAccent(c) true
     elseif isBreathing(c) true
     elseif isDiaeresis(c) true
     elseif isIotaSubscript(c) true
@@ -49,14 +78,16 @@ end
 function isPunctuation(c)
     puncts = """,."';[]-—: """
     if (contains(puncts,c)) true
+    elseif (c == "") false
     else false
     end
 end
 
 "Returns `true ` if a given character is a beta-code version of any valid lower-case consonant."
 function isValidLCConsonant(c)
-    validLCConsonants = "bgdzqklmncpstfxy"
+    validLCConsonants = "bgdzqklmncprstfxy"
     if (contains(validLCConsonants,c)) true
+    elseif (c == "") false
     else false
     end
 end
@@ -71,40 +102,45 @@ end
 
 "Returns `true ` if a given character is a beta-code version of any valid upper-case consonant."
 function isValidUCConsonant(c)
-    validUCConsonants = "BGDZQKLMNCPSTFXY"
-    if (contains(validUCConsonants,c)) true
+    validUCConsonants = "BGDZQKLMNCPRSTFXY"
+    if (c == "") false
+    elseif (contains(validUCConsonants,c)) true
     else false
     end
 end
 
 "Returns `true ` if a given character is a beta-code version of any valid consonant, upper- or lower-case."
 function isConsonant(c)
-    if (isValidUCConsonant(c)) true
+    if (c == "") false
+    elseif (isValidUCConsonant(c)) true
     elseif (isValidLCConsonant(c)) true
     else false
     end
 end
 
 
-"Returns `true ` if a given character is a beta-code version of any valid lower-case vowel. Rho counts as a vowel here, because it can take a breathing."
+"Returns `true ` if a given character is a beta-code version of any valid lower-case vowel."
 function isValidLCVowel(c)
-    validLCVowels = "aehiouwr"
-    if (contains(validLCVowels, c)) true
+    validLCVowels = "aehiouw"
+    if (c == "") false
+    elseif (contains(validLCVowels, c)) true
     else false
     end
 end
 
-"Returns `true ` if a given character is a beta-code version of any valid upper-case vowel. Rho counts as a vowel here, because it can take a breathing."
+"Returns `true ` if a given character is a beta-code version of any valid upper-case vowel."
 function isValidUCVowel(c)
-    validUCVowels = "AEHIOUWR"
-    if (contains(validUCVowels, c)) true
+    validUCVowels = "AEHIOUW"
+    if (c == "") false
+    elseif (contains(validUCVowels, c)) true
     else false
     end
 end
 
 "Returns `true ` if a given character is a beta-code version of any valid upper-case letter."
 function isUC(c)
-    if (isValidUCConsonant(c)) true
+    if (c == "") false
+    elseif (isValidUCConsonant(c)) true
     elseif (isValidUCVowel(c)) true
     else false
     end
@@ -113,7 +149,8 @@ end
 
 "Returns `true ` if a given character is a beta-code version of any valid vowel, upper- or lower-case."
 function isVowel(c)
-    if isValidUCVowel(c) true
+    if (c == "") false
+    elseif isValidUCVowel(c) true
     elseif isValidLCVowel(c) true
     else false
     end
@@ -121,7 +158,19 @@ end
 
 "Returns `true ` if a given character is a the asterix that, in original beta-code, indicated that the following letter is upper-case."
 function isUCMarker(c)
-    if c == "*" true
+    if (c == "") false
+    elseif c == "*" true
+    else false
+    end
+end
+
+"Returns `true ` if a given character is a beta-code version of any valid alphabetic, upper- or lower-case."
+function isAlphabetic(c)
+    if (c == "") false
+    elseif (isValidUCConsonant(c)) true
+    elseif (isValidLCConsonant(c)) true
+    elseif (isValidUCVowel(c)) true 
+    elseif (isValidLCVowel(c)) true 
     else false
     end
 end
@@ -134,8 +183,14 @@ function isDiphthong(s)
     end
 end
 
+#= 
+
+I'm sure the function below could be done very concisely with some bad-ass regular expression work. But not today, by me!
+
+=#
+
 "Called by `transcodeGreek()`, this recursively walks through a string and transliterates beta-code to unicode, using the `resolve()` function. `s` is the string you want to transliterate; `acc` and `ret` are empty strings when it is first called."
-function accumulate(s::String, acc::String, ret::String)
+function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool = false)
 
     # When we're done, an all characters in the original `s` have been treated, `s` will be empty, so we return `ret`. Invalid characters will be transliterated to `#`.
     if (length(s) == 0) return ret
@@ -149,17 +204,37 @@ function accumulate(s::String, acc::String, ret::String)
             else charVec[1]
             end
         end
+        # Remember, for above and below, we've already "popped" the first char off! 
+        thirdChar = begin
+            if (length(charVec) < 2) ""
+            else charVec[2]
+            end 
+        end
+        # We only need to peek at the fourth char for some of those esoteric "#…" codes
+        fourthChar = begin
+            if (length(charVec) < 3) ""
+            else charVec[3]
+            end 
+        end
 
         # Handle medial and terminal sigmas
         if (firstChar == "s")
             if (isSigmaTerminator(secondChar))
                 # No need to be fancy, just stick a terminal sigma in there.
-                newAcc = acc * "ς"
+                newAcc = begin
+                    if (upperCaseThisOne) acc * "Σ"
+                    else acc * "ς"
+                    end
+                end
                 # Iterate
                 accumulate(join(charVec),newAcc,newAcc)
             else
                 # Sigma is transliterated by default to the medial form
-                newAcc = acc * resolve(firstChar)
+                newAcc = begin
+                    if (upperCaseThisOne) acc * uppercase(resolve(firstChar))
+                    else acc * resolve(firstChar)
+                    end
+                end
                 # Iterate
                 accumulate(join(charVec),newAcc,newAcc)
             end
@@ -172,16 +247,54 @@ function accumulate(s::String, acc::String, ret::String)
                 accumulate(join(charVec),newAcc,newAcc) 
             # Handle it…
             else
-                # We don't need the asterisk any more
-                trashAsterix = popfirst!(charVec)
-                # resolve the lower-case version of the character after the asterisk (we grabbed it into `secondChar` above)
-                resolvedLC = resolve(lowercase(secondChar))
-                # Take advantage of the `Unicode` library to upper-case the result
-                resolvedUC = uppercase(resolvedLC)
-                # Iterate
-                newAcc = acc * resolvedUC
-                accumulate(join(charVec),newAcc,newAcc)
+                accumulate(join(charVec), acc, ret, true)
             end
+        # Handle the "#" codes, for funky letters and critical signs
+        elseif (firstChar == "#")
+            if (isNumber(secondChar) == false) # resolve "#" alone
+                newAcc = acc * resolve(firstChar)
+                if (length(charVec) < 1) 
+                    newAcc # resolve and return!
+                else
+                    # Iterate
+                    accumulate(join(charVec),newAcc,newAcc, upperCaseThisOne)
+                end
+            else
+                if (isNumber(thirdChar) == false) # resolve "#" * secondChar
+                    if (thirdChar != "") popfirst!(charVec) # get rid of the next char
+                    end
+                    resolvedChar = begin
+                        if (upperCaseThisOne) uppercase(resolve("#" * secondChar))
+                        else resolve("#" * secondChar)
+                        end
+                    end
+                    newAcc = acc * resolvedChar
+                    # Iterate
+                    accumulate(join(charVec),newAcc,newAcc, false)
+                else
+                    if (isNumber(fourthChar) == false ) # resolve "#" + secondChar + thirdChar
+                        popfirst!(charVec) # get rid of the next char
+                        popfirst!(charVec) # get rid of the next char
+                        resolvedChar = begin
+                        if (upperCaseThisOne) uppercase(resolve("#" * secondChar * thirdChar))
+                        else resolve("#" * secondChar * thirdChar)
+                        end
+                    end
+                    newAcc = acc * resolvedChar
+                    # Iterate
+                    accumulate(join(charVec),newAcc,newAcc, false)
+                        # Iterate
+                        accumulate(join(charVec),newAcc,newAcc, false)
+                    else # resolve "#" + secondChar + thirdChar + fourthChar
+                        #popfirst!(charVec) # get rid of the next char
+                        #popfirst!(charVec) # get rid of the next char
+                        newAcc = acc * resolve("#" * secondChar * thirdChar * fourthChar)
+                        # Iterate
+                        accumulate(join(charVec),newAcc,newAcc, false)
+                    end
+                end
+            end
+
         elseif (isUC(firstChar))
             # Rather than having a lookup dictionary twice as long as needed, we use our functions, and the affordances of `Unicode` to work around it.
             # Whatever it is, lower-case it and resolve…
@@ -193,7 +306,11 @@ function accumulate(s::String, acc::String, ret::String)
             accumulate(join(charVec),newAcc,newAcc) 
         else
             # Fall-through default: resolve and iterate
-            newAcc = acc * resolve(firstChar)
+            newAcc = begin
+                if (upperCaseThisOne) uppercase(acc * resolve(firstChar))
+                else acc * resolve(firstChar)
+                end
+            end
             accumulate(join(charVec),newAcc,newAcc)
         end
             
@@ -213,18 +330,44 @@ function transcodeGreek(s)
     Unicode.normalize(preString, :NFKC)
 end
 
-#=
 "Generate a Markdown table showing all valid vowels"
 function printVowels()
     header = """##Valid Vowels##\n\n| Greek Character | Beta-Code |\n|-----------------|-----------|"""
 
-    justVowels = collect(filter(k -> isVowel(k.first), bigLookup))
+    justVowels = begin
+        unSortedVowels = collect(filter(k -> isVowel(k.first), bigLookup))
+        sort(unSortedVowels, by = x -> x.second)
+    end
 
-    for (g, b) in justVowels
-        newLine = "\n| $g | $b |"
-        vowelMd = vowelMd * newLine
-    end        
-    vowelMd
+    vowelsMD = begin
+        map(justVowels) do p
+            grkChar = p.second
+            betaChar = p.first
+            "| $grkChar | $betaChar |"
+        end
+    end
+
+    header * "\n" * join(vowelsMD, "\n")
 
 end
-=#
+
+"Generate a Markdown table showing all valid consonants" 
+function printConsonants()
+    header = """##Valid Consonants##\n\n| Greek Character | Beta-Code |\n|-----------------|-----------|"""
+
+    justConsonants = begin
+        unSortedConsonants = collect(filter(k -> isConsonant(k.first), bigLookup))
+        sort(unSortedConsonants, by = x -> x.second)
+    end
+
+    consonantsMD = begin
+        map(justConsonants) do p
+            grkChar = p.second
+            betaChar = p.first
+            "| $grkChar | $betaChar |"
+        end
+    end
+
+    header * "\n" * join(consonantsMD, "\n")
+
+end
