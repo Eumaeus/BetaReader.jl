@@ -69,25 +69,27 @@
 @test get(BetaReader.bigLookup,"g","#") == "γ"
 @test get(BetaReader.bigLookup,"&","#") == "#"
 
-@test BetaReader.transcode("mh=nin") == "μῆνιν"
-@test BetaReader.transcode("Mh=nin") == "Μῆνιν"
-@test BetaReader.transcode("a)/eide") == "ἄειδε"
-@test BetaReader.transcode("qea/") == "θεά"
-@test BetaReader.transcode("Phlhi+a/dew") == "Πηληϊάδεω"
-@test BetaReader.transcode("A)xilh=os") == "Ἀχιλῆος"
-@test BetaReader.transcode("*phlhi+a/dew") == "Πηληϊάδεω"
-@test BetaReader.transcode("*a)xilh=os") == "Ἀχιλῆος"
+@test BetaReader.transcodeGreek("mh=nin") == "μῆνιν"
+@test BetaReader.transcodeGreek("Mh=nin") == "Μῆνιν"
+@test BetaReader.transcodeGreek("a)/eide") == "ἄειδε"
+@test BetaReader.transcodeGreek("qea/") == "θεά"
+@test BetaReader.transcodeGreek("Phlhi+a/dew") == "Πηληϊάδεω"
+@test BetaReader.transcodeGreek("A)xilh=os") == "Ἀχιλῆος"
+@test BetaReader.transcodeGreek("*phlhi+a/dew") == "Πηληϊάδεω"
+@test BetaReader.transcodeGreek("*a)xilh=os") == "Ἀχιλῆος"
 
 
-@test BetaReader.transcode("*a)xilh=os\nou)lome/nhn") == "Ἀχιλῆος\nοὐλομένην"
-@test BetaReader.transcode("ou)lome/nhn, h(\\ muri/'") == "οὐλομένην, ἣ μυρί\u0039"
-@test BetaReader.transcode("a)/lge' e)/qhke,") == "ἄλγε\u0039 ἔθηκε,"
-@test BetaReader.transcode("di=os A)xilleu/s.") == "δῖος Ἀχιλλεύς."
-@test BetaReader.transcode("cune/hke ma/xesqai;") == "ξυνέηκε μάχεσθαι;"
-@test BetaReader.transcode("ma/xesqai") == "μάχεσθαι"
-@test BetaReader.transcode(""""di=os" A)xilleu/s.""") == """"δῖος" Ἀχιλλεύς."""
-@test BetaReader.transcode("di=o?s A)xilleu/s.") == "δῖο\u0323ς Ἀχιλλεύς."
+@test BetaReader.transcodeGreek("*a)xilh=os\nou)lome/nhn") == "Ἀχιλῆος\nοὐλομένην"
+@test BetaReader.transcodeGreek("ou)lome/nhn, h(\\ muri/'") == "οὐλομένην, ἣ μυρί\u0039"
+@test BetaReader.transcodeGreek("a)/lge' e)/qhke,") == "ἄλγε\u0039 ἔθηκε,"
+@test BetaReader.transcodeGreek("di=os A)xilleu/s.") == "δῖος Ἀχιλλεύς."
+@test BetaReader.transcodeGreek("cune/hke ma/xesqai;") == "ξυνέηκε μάχεσθαι;"
+@test BetaReader.transcodeGreek("ma/xesqai") == "μάχεσθαι"
+@test BetaReader.transcodeGreek(""""di=os" A)xilleu/s.""") == """"δῖος" Ἀχιλλεύς."""
+@test BetaReader.transcodeGreek("di=o?s A)xilleu/s.") == "δῖο\u0323ς Ἀχιλλεύς."
 
+# Test export
+@test transcodeGreek("di=o?s A)xilleu/s.") == "δῖο\u0323ς Ἀχιλλεύς."
 
 end
 

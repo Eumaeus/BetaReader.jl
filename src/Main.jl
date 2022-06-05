@@ -134,7 +134,7 @@ function isDiphthong(s)
     end
 end
 
-"Called by `transcode()`, this recursively walks through a string and transliterates beta-code to unicode, using the `resolve()` function. `s` is the string you want to transliterate; `acc` and `ret` are empty strings when it is first called."
+"Called by `transcodeGreek()`, this recursively walks through a string and transliterates beta-code to unicode, using the `resolve()` function. `s` is the string you want to transliterate; `acc` and `ret` are empty strings when it is first called."
 function accumulate(s::String, acc::String, ret::String)
 
     # When we're done, an all characters in the original `s` have been treated, `s` will be empty, so we return `ret`. Invalid characters will be transliterated to `#`.
@@ -208,7 +208,7 @@ function resolve(s)
 end
 
 "Initialize the iteratore, `accumulate()`; get the final result, which will be using combining diacritics; then normalize to `:NFKC`, using pre-combined diacritics."
-function transcode(s)
+function transcodeGreek(s)
     preString = accumulate(s, "", "")
     Unicode.normalize(preString, :NFKC)
 end
