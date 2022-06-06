@@ -1,3 +1,4 @@
+# Functions for documenting coverate and equivalances
 
 "Generate a Markdown table showing all valid consonants" 
 function printConsonants()
@@ -38,5 +39,27 @@ function printVowels()
     end
 
     header * "\n" * join(vowelsMD, "\n")
+
+end
+
+
+"Generate a Markdown table showing all valid alphabetic characters" 
+function printAlphabetics()
+    header = """##Valid Alphabetic Characters##\n\n(medial and terminal sigmas are handled by the library)\n\n| Greek Character | Beta-Code |\n|-----------------|-----------|"""
+
+    justAlphabetics = begin
+        unSortedConsonants = collect(filter(k -> isAlphabetic(k.first), bigLookup))
+        sort(unSortedConsonants, by = x -> x.second)
+    end
+
+    alphabeticsMD = begin
+        map(justAlphabetics) do p
+            grkChar = p.second
+            betaChar = p.first
+            "| $grkChar | $betaChar |"
+        end
+    end
+
+    header * "\n" * join(alphabeticsMD, "\n")
 
 end
