@@ -1,65 +1,78 @@
 # Functions for documenting coverate and equivalances
 
-"Generate a Markdown table showing all valid consonants" 
-function printConsonants()
-    header = """##Valid Consonants##\n\n| Greek Character | Beta-Code |\n|-----------------|-----------|"""
+"Generate a Markdown report of all characters represented in the library"
+function printReferenceGuide()
+    header = """# Reference Guide\n\n"""
 
-    justConsonants = begin
-        unSortedConsonants = collect(filter(k -> isConsonant(k.first), bigLookup))
-        sort(unSortedConsonants, by = x -> x.second)
-    end
+    notes = """For upper-case alphabetic letters, this library accepts upper-case versions of the beta-code equivalent, *e.g.* 'W' → 'Ω', or the `asterisk + lower-case` encoding original to beta-code, *e.g.* '\\*w' → 'Ω'.\n\n"""
 
-    consonantsMD = begin
-        map(justConsonants) do p
-            grkChar = p.second
-            betaChar = p.first
-            "| $grkChar | $betaChar |"
-        end
-    end
+    reports = [
+        printOneRef(isAlphabetic, "Alphabetic Characters", "Note that medial- and terminal-sigmas will be handled by the transcoding."),
+        printOneRef(isDiacritical, "Diacritic Marks"),
+        printOneRef(isPunctuation, "Punctuation Characters"),
+        printOneRef(isEditorial, "Editorial and Critical Signs"),
+        printOneRef(isArchaic, "Archaic and Esoteric Characters")
 
-    header * "\n" * join(consonantsMD, "\n")
+    ] 
+
+    header  * notes * join(reports,"\n\n") * "\n\n" * demos()
 
 end
 
-"Generate a Markdown table showing all valid vowels"
-function printVowels()
-    header = """##Valid Vowels##\n\n| Greek Character | Beta-Code |\n|-----------------|-----------|"""
+function printOneRef( f = isAlphabetic, title = "Alphabetic Characters", notes = "")
 
-    justVowels = begin
-        unSortedVowels = collect(filter(k -> isVowel(k.first), bigLookup))
-        sort(unSortedVowels, by = x -> x.second)
+    header = """## Valid $title\n\n$notes\n\n| Unicode | Beta-Code | Description |\n|---------|-----------|-------------|"""
+
+    justThese = begin
+        unSorted = collect(filter(k -> f(k.first),bigLookup))
+        sort(unSorted, by = x -> x.second[1])
     end
 
-    vowelsMD = begin
-        map(justVowels) do p
-            grkChar = p.second
-            betaChar = p.first
-            "| $grkChar | $betaChar |"
+    outputMd = begin
+         map(justThese) do p
+           desc = p.second[2]
+           grkChar = p.second[1]
+           #betaChar = replace(p.first, "|" => "\\|", "\u0022" => "\\\u022")
+           betaChar = p.first
+           if (betaChar == " ") betaChar = "space" end
+            "| $grkChar | `$betaChar` | $desc (Unicode $(codepoint(grkChar[1]))) |"
         end
     end
 
-    header * "\n" * join(vowelsMD, "\n")
+    header * "\n" * join(outputMd, "\n")
 
 end
 
+function demos()
 
-"Generate a Markdown table showing all valid alphabetic characters" 
-function printAlphabetics()
-    header = """##Valid Alphabetic Characters##\n\n(medial and terminal sigmas are handled by the library)\n\n| Greek Character | Beta-Code |\n|-----------------|-----------|"""
+    header = """## Examples\n\nThe following examples should give an idea of the relationship between beta-code and Unicode.\n\n| Beta-Code | Unicode|\n|-----|-----|\n"""
 
-    justAlphabetics = begin
-        unSortedConsonants = collect(filter(k -> isAlphabetic(k.first), bigLookup))
-        sort(unSortedConsonants, by = x -> x.second)
+    demoStrings = [
+
+    """mh=nin a)/eide qea\\ *phlhi+a/dew *)axilh=os""",
+    """ou)lome/nhn, h(\\ muri/' *)axaioi=s a)/lge' e)/qhke,""",
+    """polla\\s d' i)fqi/mous yuxa\\s *)/ai+di proi+/ayen""", 
+    """h(rw/wn, au)tou\\s de\\ e(lw/ria teu=xe ku/nessin""", 
+    """oi)wnoi=si/ te pa=si, *dio\\s d' e)telei/eto boulh/,""", 
+    """e)c ou(= dh\\ ta\\ prw=ta diasth/thn e)ri/sante""", 
+    """*)atrei+/dhs te a)/nac a)ndrw=n kai\\ di=os *)axilleu/s."""
+
+    ]
+
+#    demoMD = map( s -> "$s\n\n$(transcodeGreek(s))\n\n", demoStrings)
+
+    demoMD = map(demoStrings) do s
+        """| `$s` | $(transcodeGreek(s)) |"""
     end
 
-    alphabeticsMD = begin
-        map(justAlphabetics) do p
-            grkChar = p.second
-            betaChar = p.first
-            "| $grkChar | $betaChar |"
-        end
-    end
-
-    header * "\n" * join(alphabeticsMD, "\n")
+    header * join(demoMD, "\n")
 
 end
+
+"Escape iota-subscripts in beta-code for Markdown"
+function escapeIotaSubsForMD(s)
+    r = r"[|]"
+    capsFixed = replace(s, r => s"\\|")
+    capsFixed
+end
+

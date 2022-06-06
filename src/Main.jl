@@ -25,7 +25,7 @@ end
 
 "Returns `true ` if a given character is an editorial mark or critical sign."
 function isEditorial(c)
-    editorial = [ "#6"  , "#8"  , "#9"  , "#10" , "#11" , "#12" , "#13" , "#14" , "#15" , "#16" , "#17" , "#18" , "#19" , "#53", "?", "%", "%13", "%158", "%163", "#305" ] 
+    editorial = [ "#6"  , "#8"  , "#9"  , "#10" , "#11" , "#12" , "#13" , "#14" , "#15" , "#16" , "#17" , "#18" , "#19" , "#53", "?", "%", "%13", "%158", "%163", "#305", "?" ] 
     if (c == "") false
     elseif (c in editorial)
         true
@@ -373,7 +373,7 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
         else
             # Fall-through default: resolve and iterate
             newAcc = begin
-                if (upperCaseThisOne) uppercase(acc * resolve(firstChar))
+                if (upperCaseThisOne) acc * uppercase(resolve(firstChar))
                 else acc * resolve(firstChar)
                 end
             end
@@ -387,12 +387,21 @@ end
 
 "Simply look up `s` in `BetaReader.bigLookup`, in file `CharDict.jl`. If the lookup failes, return the invalid-beta-code sign `#`."
 function resolve(s)
-    get(bigLookup, s, "#")
+    answer = get(bigLookup, s, ("#", "invalid beta-code"))
+    answer[1]
+end
+
+"Pre-process a string to be transcoded. First, correct the order of accented  capital letters to: asterisk + letter + diacriticals"
+function preprocessGreek(s)
+    r = r"\*([)(/\\=]+)([a-zA-Z])"
+    capsFixed = replace(s, r => s"*\2\1")
+    capsFixed
 end
 
 "Initialize the iteratore, `accumulate()`; get the final result, which will be using combining diacritics; then normalize to `:NFKC`, using pre-combined diacritics."
 function transcodeGreek(s)
-    preString = accumulate(s, "", "")
+    pp = preprocessGreek(s)
+    preString = accumulate(pp, "", "")
     Unicode.normalize(preString, :NFKC)
 end
 
