@@ -163,6 +163,11 @@
 @test transcodeGreek("#53 b") == "\u205D β" #  ⁝ tricolon
 @test transcodeGreek("#150 b") == "\u221E β" # infinity
 
+@test transcodeGreek("#400 b") == "\u0371 β" # archaic letter heta (lc)
+@test transcodeGreek("*#400 b") == "\u0370 β" # archaic letter heta (uc)
+
+
+
 @test transcodeGreek("% b") == "\u2020 β" #  † dagger/crux
 @test transcodeGreek("%13 b") == "\u2021 β" #  ‡ double-dagger
 @test transcodeGreek("%158 b") == "\u2042 β" #  ⁂ asterism
@@ -176,6 +181,7 @@
 @test BetaReader.isArchaic("#3")
 @test BetaReader.isArchaic("#4")
 @test BetaReader.isArchaic("#5")
+@test BetaReader.isArchaic("#400")
 @test BetaReader.isArchaic("") == false
 @test BetaReader.isArchaic("#9") == false
 @test BetaReader.isArchaic("#11") == false
@@ -193,6 +199,7 @@
 @test BetaReader.isEditorial("#53")
 @test BetaReader.isEditorial("#53")
 @test BetaReader.isEditorial("#11")
+@test BetaReader.isEditorial("#305")
 @test BetaReader.isEditorial("?")
 @test BetaReader.isEditorial("a") == false
 @test BetaReader.isEditorial(":") == false

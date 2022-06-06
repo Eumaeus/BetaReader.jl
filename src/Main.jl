@@ -25,7 +25,7 @@ end
 
 "Returns `true ` if a given character is an editorial mark or critical sign."
 function isEditorial(c)
-    editorial = [ "#6"  , "#8"  , "#9"  , "#10" , "#11" , "#12" , "#13" , "#14" , "#15" , "#16" , "#17" , "#18" , "#19" , "#53", "?", "%", "%13", "%158", "%163" ] 
+    editorial = [ "#6"  , "#8"  , "#9"  , "#10" , "#11" , "#12" , "#13" , "#14" , "#15" , "#16" , "#17" , "#18" , "#19" , "#53", "?", "%", "%13", "%158", "%163", "#305" ] 
     if (c == "") false
     elseif (c in editorial)
         true
@@ -36,7 +36,7 @@ end
 
 "Returns `true ` if a given character is an archaic form."
 function isArchaic(c)
-    archaic = ["#1","#2","#3","#4","#5"]
+    archaic = ["#1","#2","#3","#4","#5", "#400"]
     if (c == "") false
     elseif (c in archaic)
         true
@@ -299,7 +299,12 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
                         popfirst!(charVec) # get rid of the next char
                         popfirst!(charVec) # get rid of the next char
                         popfirst!(charVec) # get rid of the next char
-                        newAcc = acc * resolve("#" * secondChar * thirdChar * fourthChar)
+                        resolvedChar = begin
+                            if (upperCaseThisOne) uppercase(resolve("#" * secondChar * thirdChar * fourthChar))
+                            else resolve("#" * secondChar * thirdChar * fourthChar)
+                            end
+                        end
+                        newAcc = acc * resolvedChar
                         # Iterate
                         accumulate(join(charVec),newAcc,newAcc, false)
                     end
@@ -344,8 +349,12 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
                         popfirst!(charVec) # get rid of the next char
                         popfirst!(charVec) # get rid of the next char
                         popfirst!(charVec) # get rid of the next char
-                        newAcc = acc * resolve("%" * secondChar * thirdChar * fourthChar)
-                        # Iterate
+                        resolvedChar = begin
+                            if (upperCaseThisOne) uppercase(resolve("%" * secondChar * thirdChar * fourthChar))
+                            else resolve("%" * secondChar * thirdChar * fourthChar)
+                            end
+                        end
+                        newAcc = acc * resolvedChar                        # Iterate
                         accumulate(join(charVec),newAcc,newAcc, false)
                     end
                 end
@@ -387,24 +396,4 @@ function transcodeGreek(s)
     Unicode.normalize(preString, :NFKC)
 end
 
-"Generate a Markdown table showing all valid vowels"
-function printVowels()
-    header = """##Valid Vowels##\n\n| Greek Character | Beta-Code |\n|-----------------|-----------|"""
-
-    justVowels = begin
-        unSortedVowels = collect(filter(k -> isVowel(k.first), bigLookup))
-        sort(unSortedVowels, by = x -> x.second)
-    end
-
-    vowelsMD = begin
-        map(justVowels) do p
-            grkChar = p.second
-            betaChar = p.first
-            "| $grkChar | $betaChar |"
-        end
-    end
-
-    header * "\n" * join(vowelsMD, "\n")
-
-end
 

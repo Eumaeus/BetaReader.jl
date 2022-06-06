@@ -66,6 +66,7 @@ bigLookup = Dict([
     ("#3" => "\u03D9") # Greek Letter Archaic Koppa
     ("#4" => "\u03DE") # Greek Letter Koppa → glyph variant of Greek Letter Koppa
     ("#5" => "\u03E1") # sampi
+    ("#400" => "\u0371") # letter heta
 
     # critical signs
 
@@ -84,6 +85,7 @@ bigLookup = Dict([
     ("#19" => "\u0300") # ◌̂ Combining Grave Accent → editorial
     ("#53" => "\u205D") #  ⁝ tricolon
     ("#150" => "\u221E") # ∞ infinity
+    ("#305" => "\u2E0E") # ⸎ Editorial Coronis 
     ("%" => "\u2020") #  † dagger/crux
     ("%13" => "\u2021") #  ‡ double-dagger
     ("%158" => "\u2042") #  ⁂ asterism
