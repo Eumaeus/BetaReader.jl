@@ -46,7 +46,7 @@ Note that medial- and terminal-sigmas will be handled by the transcoding.
 | ̓ | `)` | smooth breathing (Unicode 787) |
 | ̔ | `(` | rough breathing (Unicode 788) |
 | ͂ | `=` | circumflex (Unicode 834) |
-| ͅ | `|` | iota-subscript (Unicode 837) |
+| ͅ | `\|` | iota-subscript (Unicode 837) |
 
 ## Valid Punctuation Characters
 
