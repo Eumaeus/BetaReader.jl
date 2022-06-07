@@ -1,7 +1,7 @@
 name = "BetaReader"
 uuid = "e5583720-4bc8-44d1-bd9a-9734450b0166"
 authors = ["Eumaeus <cwblackwell@gmail.com>"]
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
 Compat = "34da2185-b29b-5c13-b0c7-acf172513d20"
