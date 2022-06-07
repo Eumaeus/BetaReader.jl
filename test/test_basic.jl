@@ -210,6 +210,12 @@
 @test BetaReader.isEditorial("#") == false
 @test BetaReader.isEditorial("*") == false
 
+# Test incomplete and wrong strings
+
+@test BetaReader.transcodeGreek("#45") == "#"
+@test BetaReader.transcodeGreek("v") == "#"
+@test BetaReader.transcodeGreek("@") == "#"
+
 
 # Truth test
 
@@ -234,6 +240,38 @@ e)c ou(= dh\\ ta\\ prw=ta diasth/thn e)ri/sante\n\n
 
 @test transcodeGreek(iliad) == transcodeGreek(iliadBadBeta)
 
+# Test Documentation Coverage
+
+@test begin
+   gcs = map(collect(BetaReader.bigLookup)) do c
+     c[1] 
+   end
+
+   alphas = filter(c -> BetaReader.isAlphabetic(c), gcs) 
+   diacritics = filter(c -> BetaReader.isDiacritical(c), gcs) 
+   puncts = filter(c -> BetaReader.isPunctuation(c), gcs) 
+   archaics = filter(c -> BetaReader.isArchaic(c), gcs) 
+   edits = filter(c -> BetaReader.isEditorial(c), gcs)
+   math = filter(c -> BetaReader.isMathematical(c), gcs)
+
+
+   cats = collect(Iterators.flatten([alphas, diacritics, puncts, archaics, edits, math]))
+
+
+   catSizes = length(cats)
+
+   catLength = sum(catSizes)
+   gcsLength = length(gcs)
+
+   if (catLength != gcsLength)
+     z = setdiff(gcs, cats)
+     println("$catLength $gcsLength")
+     println("Missing: $z")
+   end
+   catLength == gcsLength
+
+
+end
 
 end
 

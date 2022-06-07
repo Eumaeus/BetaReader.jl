@@ -11,7 +11,8 @@ function printReferenceGuide()
         printOneRef(isDiacritical, "Diacritic Marks"),
         printOneRef(isPunctuation, "Punctuation Characters"),
         printOneRef(isEditorial, "Editorial and Critical Signs"),
-        printOneRef(isArchaic, "Archaic and Esoteric Characters")
+        printOneRef(isArchaic, "Archaic and Esoteric Characters"),
+        printOneRef(isMathematical, "Mathematical Symbols")
 
     ] 
 
@@ -35,6 +36,11 @@ function printOneRef( f = isAlphabetic, title = "Alphabetic Characters", notes =
            #betaChar = replace(p.first, "|" => "\\|", "\u0022" => "\\\u022")
            betaChar = p.first
            if (betaChar == " ") betaChar = "space" end
+           if (betaChar == "\n") betaChar = "return" end
+           if (betaChar == "\t") betaChar = "tab" end
+           if (grkChar == "\t") grkChar = "tab" end
+           if (grkChar == " ") grkChar = "space" end
+           if (grkChar == "\n") grkChar = "return" end
             "| $grkChar | `$betaChar` | $desc (Unicode $(codepoint(grkChar[1]))) |"
         end
     end

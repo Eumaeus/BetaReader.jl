@@ -54,7 +54,9 @@ Note that medial- and terminal-sigmas will be handled by the transcoding.
 
 | Unicode | Beta-Code | Description |
 |---------|-----------|-------------|
-|   | `space` | space (Unicode 32) |
+| tab | `tab` | tab character (Unicode 116) |
+| return | `return` | carriage-return '\n' (Unicode 114) |
+| space | `space` | space (Unicode 115) |
 | " | `"` | quotation mark (Unicode 34) |
 | ' | `'` | apostrophe, mark of elision (Unicode 39) |
 | , | `,` | comma (Unicode 44) |
@@ -103,6 +105,14 @@ Note that medial- and terminal-sigmas will be handled by the transcoding.
 | Ϟ | `#4` | glyph variant of archaic koppa (Unicode 990) |
 | ϟ | `#1` | koppa (Unicode 991) |
 | ϡ | `#5` | sampi (Unicode 993) |
+
+## Valid Mathematical Symbols
+
+
+
+| Unicode | Beta-Code | Description |
+|---------|-----------|-------------|
+| ∞ | `#150` | infinity (Unicode 8734) |
 
 ## Examples
 

@@ -45,6 +45,17 @@ function isArchaic(c)
     end
 end
 
+"Returns `true` if a given character is a mathematical symbol."
+function isMathematical(c)
+    archaic = ["#150"]
+    if (c == "") false
+    elseif (c in archaic)
+        true
+    else
+        false
+    end
+end
+
 "Returns `true ` if a given character is a beta-code acute, grave, *or* circumflex."
 function isAccent(c)
     accents = "/\\="
@@ -86,7 +97,7 @@ end
 
 "Returns `true ` if a given character is a beta-code version of any punctuation mark."
 function isPunctuation(c)
-    puncts = """,."';[]-—: #"""
+    puncts = """,."';[]-—: #\t\n"""
     if (c == "") false
     elseif (contains(puncts,c)) true
     else false
