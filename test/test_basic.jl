@@ -216,27 +216,43 @@
 @test BetaReader.transcodeGreek("v") == "#"
 @test BetaReader.transcodeGreek("@") == "#"
 
+# Arabic Numerals should just pass through
+
+@test BetaReader.transcodeGreek("4") == "4"
+@test BetaReader.transcodeGreek("2") == "2"
+@test BetaReader.transcodeGreek("0") == "0"
+
+
 
 # Truth test
 
-iliad = """mh=nin a)/eide qea\\ *phlhi+a/dew *a)xilh=os\n\n
-ou)lome/nhn, h(\\ muri/' *a)xaioi=s a)/lge' e)/qhke,\n\n
-polla\\s d' i)fqi/mous yuxa\\s *a)/i+di proi+/ayen\n\n
-h(rw/wn, au)tou\\s de\\ e(lw/ria teu=xe ku/nessin\n\n
-5oi)wnoi=si/ te pa=si, *dio\\s d' e)telei/eto boulh/,\n\n
-e)c ou(= dh\\ ta\\ prw=ta diasth/thn e)ri/sante\n\n
+iliad = """mh=nin a)/eide qea\\ *phlhi+a/dew *a)xilh=os\n
+ou)lome/nhn, h(\\ muri/' *a)xaioi=s a)/lge' e)/qhke,\n
+polla\\s d' i)fqi/mous yuxa\\s *a)/i+di proi+/ayen\n
+h(rw/wn, au)tou\\s de\\ e(lw/ria teu=xe ku/nessin\n
+oi)wnoi=si/ te pa=si, *dio\\s d' e)telei/eto boulh/,\n
+e)c ou(= dh\\ ta\\ prw=ta diasth/thn e)ri/sante\n
 *a)trei+/dhs te a)/nac a)ndrw=n kai\\ di=os *a)xilleu/s."""
 
-iliadBadBeta = """mh=nin a)/eide qea\\ *phlhi+a/dew *)axilh=os\n\n
-ou)lome/nhn, h(\\ muri/' *)axaioi=s a)/lge' e)/qhke,\n\n
-polla\\s d' i)fqi/mous yuxa\\s *)/ai+di proi+/ayen\n\n
-h(rw/wn, au)tou\\s de\\ e(lw/ria teu=xe ku/nessin\n\n
-5oi)wnoi=si/ te pa=si, *dio\\s d' e)telei/eto boulh/,\n\n
-e)c ou(= dh\\ ta\\ prw=ta diasth/thn e)ri/sante\n\n
+iliadBadBeta = """mh=nin a)/eide qea\\ *phlhi+a/dew *)axilh=os\n
+ou)lome/nhn, h(\\ muri/' *)axaioi=s a)/lge' e)/qhke,\n
+polla\\s d' i)fqi/mous yuxa\\s *)/ai+di proi+/ayen\n
+h(rw/wn, au)tou\\s de\\ e(lw/ria teu=xe ku/nessin\n
+oi)wnoi=si/ te pa=si, *dio\\s d' e)telei/eto boulh/,\n
+e)c ou(= dh\\ ta\\ prw=ta diasth/thn e)ri/sante\n
 *)atrei+/dhs te a)/nac a)ndrw=n kai\\ di=os *)axilleu/s."""
 
 
-@test transcodeGreek(iliad) == "μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος\n\n\nοὐλομένην, ἣ μυρί' Ἀχαιοῖς ἄλγε' ἔθηκε,\n\n\nπολλὰς δ' ἰφθίμους ψυχὰς Ἄϊδι προΐαψεν\n\n\nἡρώων, αὐτοὺς δὲ ἑλώρια τεῦχε κύνεσσιν\n\n\n#οἰωνοῖσί τε πᾶσι, Διὸς δ' ἐτελείετο βουλή,\n\n\nἐξ οὗ δὴ τὰ πρῶτα διαστήτην ἐρίσαντε\n\n\nἈτρεΐδης τε ἄναξ ἀνδρῶν καὶ δῖος Ἀχιλλεύς."
+
+typedIliad = """μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος\n\nοὐλομένην, ἣ μυρί' Ἀχαιοῖς ἄλγε' ἔθηκε,\n\nπολλὰς δ' ἰφθίμους ψυχὰς Ἄϊδι προΐαψεν\n\nἡρώων, αὐτοὺς δὲ ἑλώρια τεῦχε κύνεσσιν\n\nοἰωνοῖσί τε πᾶσι, Διὸς δ' ἐτελείετο βουλή,\n\nἐξ οὗ δὴ τὰ πρῶτα διαστήτην ἐρίσαντε\n\nἈτρεΐδης τε ἄναξ ἀνδρῶν καὶ δῖος Ἀχιλλεύς."""
+
+#=
+println("transcodeGreek(iliad) length = $(length(transcodeGreek(iliad)))")
+println("typedIliad length = $(length(typedIliad))")
+println("cmp -> $(cmp(transcodeGreek(iliad), typedIliad))")
+=#
+
+@test transcodeGreek(iliad) == typedIliad
 
 @test transcodeGreek(iliad) == transcodeGreek(iliadBadBeta)
 

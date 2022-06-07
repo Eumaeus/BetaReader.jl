@@ -381,6 +381,9 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
             # Iterate
             newAcc = acc * resolvedUC
             accumulate(join(charVec),newAcc,newAcc) 
+        elseif (isNumber(firstChar))
+            # Arabic numbers should just go through
+            newAcc = acc * firstChar
         else
             # Fall-through default: resolve and iterate
             newAcc = begin
@@ -409,7 +412,7 @@ function preprocessGreek(s)
     capsFixed
 end
 
-"Initialize the iteratore, `accumulate()`; get the final result, which will be using combining diacritics; then normalize to `:NFKC`, using pre-combined diacritics."
+"Initialize the iterator, `accumulate()`; get the final result, which will be using combining diacritics; then normalize to `:NFKC`, using pre-combined diacritics."
 function transcodeGreek(s)
     pp = preprocessGreek(s)
     preString = accumulate(pp, "", "")

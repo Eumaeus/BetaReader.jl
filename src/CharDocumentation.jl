@@ -1,6 +1,6 @@
 # Functions for documenting coverate and equivalances
 
-"Generate a Markdown report of all characters represented in the library"
+"Generates and returns a Markdown report of all characters represented in the library"
 function printReferenceGuide()
     header = """# Reference Guide\n\n"""
 
@@ -20,6 +20,7 @@ function printReferenceGuide()
 
 end
 
+# Does the work of assembling a Markdown table; takes three parameters: `f` is a function (see Main.jl), `title` is the label of the table, `notes` is whatever should come between the title and the table.
 function printOneRef( f = isAlphabetic, title = "Alphabetic Characters", notes = "")
 
     header = """## Valid $title\n\n$notes\n\n| Unicode | Beta-Code | Description |\n|---------|-----------|-------------|"""
@@ -49,6 +50,7 @@ function printOneRef( f = isAlphabetic, title = "Alphabetic Characters", notes =
 
 end
 
+"A place for putting example beta-code, which will be transcoded and included at the end of the reference guide."
 function demos()
 
     header = """## Examples\n\nThe following examples should give an idea of the relationship between beta-code and Unicode.\n\n| Beta-Code | Unicode|\n|-----|-----|\n"""
@@ -75,7 +77,7 @@ function demos()
 
 end
 
-"Escape iota-subscripts in beta-code for Markdown"
+"Escape iota-subscripts in beta-code for Markdown; not really necessary when using `|`."
 function escapeIotaSubsForMD(s)
     r = r"[|]"
     capsFixed = replace(s, r => s"\\|")
