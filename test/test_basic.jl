@@ -289,5 +289,38 @@ println("cmp -> $(cmp(transcodeGreek(iliad), typedIliad))")
 
 end
 
+@test begin
+  BetaReader.normalizeUCGreek("αβγ") == "αβγ"
+end
+
+@test begin
+  BetaReader.ucToLatin("αβγ") == "αβγ"
+end
+
+@test begin
+  BetaReader.ucToBeta("αβγ") == "αβγ"
+end
+
+@test begin
+  testMap = BetaReader.tlMap("α", "a", "a", "a") 
+  testMap.ucode == "α"
+  testMap.bcode == "a"
+  testMap.latinUC == "a"
+  testMap.latinAscii == "a"
+end
+
+@test begin
+    testString = ")=|a"
+    sortedString = BetaReader.sort_greek_character(testString)
+    sortedString == "a)=|"
+end
+
+@test begin
+  testString = BetaReader.ucToBeta("μῆνιν ἄειδε θεά")
+  println(typeof(testString))
+  typeof(testString) == AbstractString
+end
+
+
 end
 
