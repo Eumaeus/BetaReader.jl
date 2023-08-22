@@ -3,7 +3,8 @@ module BetaReader
 using Unicode
 using PolytonicGreek
 
-include("Main.jl")
+include("Beta.jl")
+include("UCode.jl")
 include("CharDict.jl")
 include("CharDocumentation.jl")
 
