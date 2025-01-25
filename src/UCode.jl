@@ -14,6 +14,8 @@ function nfkc_to_nfkd(greek_string::AbstractString)
     return join([Unicode.normalize(string(x), :NFKD) for x in Unicode.normalize(greek_string, :NFKC)])
 end
 
+
+
 "Transliterate a polytonic Greek string, in Unicode, to a beta-code transliteration"
 function ucToBeta(u)
     normalU = normalizeUCGreek(u)
