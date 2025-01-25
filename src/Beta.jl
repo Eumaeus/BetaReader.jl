@@ -25,7 +25,7 @@ end
 
 "Returns `true ` if a given character is an editorial mark or critical sign."
 function isEditorial(c)
-    editorial = [ "#6"  , "#8"  , "#9"  , "#10" , "#11" , "#12" , "#13" , "#14" , "#15" , "#16" , "#17" , "#18" , "#19" , "#53", "?", "%", "%13", "%158", "%163", "#305", "?" ] 
+    editorial = [ "#6"  , "#8"  , "#9"  , "#10" , "#11" , "#12" , "#13" , "#14" , "#15" , "#16" , "#17" , "#18" , "#19" , "#53", "?", "%", "%13", "%158", "%163", "#305", "?", "]3", "[3", "%41", "#74", "[1", "#465", "}", "]2", "#310", "%43", "[4", "–", "%40", "]1", "]4", "%45", "%17", "[2", "%1", "{", "%5", "%44", "%42", "#22", "%46", "%141" ] 
     if (c == "") false
     elseif (c in editorial)
         true
@@ -115,8 +115,8 @@ end
 
 "Returns `true ` if a given character is a beta-code version of any character that would cause a sigma to take its terminal form."
 function isSigmaTerminator(c)
-    sigmaTerms = """,.":;— \t\n"""
-    if (contains(sigmaTerms, c   )) true
+    sigmaTerms = """,.":;–— \t\n"""
+    if (contains(sigmaTerms, c ) || (c == "")) true
     else false
     end
 end
@@ -252,7 +252,7 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
             else
                 # Sigma is transliterated by default to the medial form
                 newAcc = begin
-                    if (upperCaseThisOne) acc * uppercase(resolve(firstChar))
+                    if (upperCaseThisOne) acc * "Σ"
                     else acc * resolve(firstChar)
                     end
                 end
@@ -272,59 +272,10 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
                 accumulate(join(charVec), acc, ret, true)
             end
 
-        # Handle the "#" codes, for funky letters and critical signs
-        elseif (firstChar == "#")
-            if (isNumber(secondChar) == false) # resolve "#" alone
-                newAcc = acc * resolve(firstChar)
-                if (length(charVec) < 1) 
-                    newAcc # resolve and return!
-                else
-                    # Iterate
-                    accumulate(join(charVec),newAcc,newAcc, upperCaseThisOne)
-                end
-            else
-                if (isNumber(thirdChar) == false) # resolve "#" * secondChar
-                    if (thirdChar != "") popfirst!(charVec) # get rid of the next char
-                    end
-                    resolvedChar = begin
-                        if (upperCaseThisOne) uppercase(resolve("#" * secondChar))
-                        else resolve("#" * secondChar)
-                        end
-                    end
-                    newAcc = acc * resolvedChar
-                    # Iterate
-                    accumulate(join(charVec),newAcc,newAcc, false)
-                else
-                    if (isNumber(fourthChar) == false ) # resolve "#" + secondChar + thirdChar
-                        popfirst!(charVec) # get rid of secondChar
-                        popfirst!(charVec) # get rid of thirdChar
-                        resolvedChar = begin
-                            if (upperCaseThisOne) uppercase(resolve("#" * secondChar * thirdChar))
-                                else resolve("#" * secondChar * thirdChar)
-                            end
-                        end
-                        newAcc = acc * resolvedChar
-                        # Iterate
-                        accumulate(join(charVec),newAcc,newAcc, false)
-                    else # resolve "#" + secondChar + thirdChar + fourthChar
-                        popfirst!(charVec) # get rid of the next char
-                        popfirst!(charVec) # get rid of the next char
-                        popfirst!(charVec) # get rid of the next char
-                        resolvedChar = begin
-                            if (upperCaseThisOne) uppercase(resolve("#" * secondChar * thirdChar * fourthChar))
-                            else resolve("#" * secondChar * thirdChar * fourthChar)
-                            end
-                        end
-                        newAcc = acc * resolvedChar
-                        # Iterate
-                        accumulate(join(charVec),newAcc,newAcc, false)
-                    end
-                end
-            end
 
-        # Handle the "%" codes, for funky letters and critical signs
-        elseif (firstChar == "%")
-            if (isNumber(secondChar) == false) # resolve "%" alone
+        # Handle the "%", "#", "[", and "]" codes, for funky letters and critical signs
+        elseif (contains("#%[]", firstChar))
+            if (isNumber(secondChar) == false) # resolve firstChar alone
                 newAcc = acc * resolve(firstChar)
                 if (length(charVec) < 1) 
                     newAcc # resolve and return!
@@ -333,36 +284,35 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
                     accumulate(join(charVec),newAcc,newAcc, upperCaseThisOne)
                 end
             else
-                if (isNumber(thirdChar) == false) # resolve "%" * secondChar
-                    if (thirdChar != "") popfirst!(charVec) # get rid of the next char
-                    end
+                if (isNumber(thirdChar) == false) # resolve firstChar * secondChar
+                    popfirst!(charVec) # get rid of the next char
                     resolvedChar = begin
-                        if (upperCaseThisOne) uppercase(resolve("%" * secondChar))
-                        else resolve("%" * secondChar)
+                        if (upperCaseThisOne) uppercase(resolve(firstChar * secondChar))
+                        else resolve(firstChar * secondChar)
                         end
                     end
                     newAcc = acc * resolvedChar
                     # Iterate
                     accumulate(join(charVec),newAcc,newAcc, false)
                 else
-                    if (isNumber(fourthChar) == false ) # resolve "%" + secondChar + thirdChar
+                    if (isNumber(fourthChar) == false ) # resolve firstChar + secondChar + thirdChar
                         popfirst!(charVec) # get rid of secondChar
                         popfirst!(charVec) # get rid of thirdChar
                         resolvedChar = begin
-                            if (upperCaseThisOne) uppercase(resolve("%" * secondChar * thirdChar))
-                                else resolve("%" * secondChar * thirdChar)
+                            if (upperCaseThisOne) uppercase(resolve(firstChar * secondChar * thirdChar))
+                                else resolve(firstChar * secondChar * thirdChar)
                             end
                         end
                         newAcc = acc * resolvedChar
                         # Iterate
                         accumulate(join(charVec),newAcc,newAcc, false)
-                    else # resolve "%" + secondChar + thirdChar + fourthChar
+                    else # resolve firstChar + secondChar + thirdChar + fourthChar
                         popfirst!(charVec) # get rid of the next char
                         popfirst!(charVec) # get rid of the next char
                         popfirst!(charVec) # get rid of the next char
                         resolvedChar = begin
-                            if (upperCaseThisOne) uppercase(resolve("%" * secondChar * thirdChar * fourthChar))
-                            else resolve("%" * secondChar * thirdChar * fourthChar)
+                            if (upperCaseThisOne) uppercase(resolve(firstChar * secondChar * thirdChar * fourthChar))
+                            else resolve(firstChar * secondChar * thirdChar * fourthChar)
                             end
                         end
                         newAcc = acc * resolvedChar                        # Iterate
@@ -399,24 +349,60 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
 
 end
 
-"Simply look up `s` in `BetaReader.bigLookup`, in file `CharDict.jl`. If the lookup failes, return the invalid-beta-code sign `#`."
+"Simply look up `s` in `BetaReader.bigLookup`, in file `CharDict.jl`. If the lookup fails, return the invalid-beta-code sign `#`."
 function resolve(s)
     answer = get(bigLookup, s, ("#", "invalid beta-code"))
     answer[1]
 end
 
-"Pre-process a string to be transcoded. First, correct the order of accented  capital letters to: asterisk + letter + diacriticals"
-function preprocessGreek(s)
-    r = r"\*([)(/\\=]+)([a-zA-Z])"
-    capsFixed = replace(s, r => s"*\2\1")
-    capsFixed
+# We want oxia, dammit, not tonos!
+function fixoxia(s)
+     s = replace(s, "\u0390" => "\u1FD3") # iota, dialytika, oxia
+     s = replace(s, "\u03B0" => "\u1FE3") # upsilon, dialytika, oxia
+     s = replace(s, "\u03AC" => "\u1F71") # alpha
+     s = replace(s, "\u03AD" => "\u1F73") # epsilon
+     s = replace(s, "\u03AE" => "\u1F75") # eta
+     s = replace(s, "\u03AF" => "\u1F77") # iota
+     s = replace(s, "\u03CC" => "\u1F79") # omicron
+     s = replace(s, "\u03CD" => "\u1F7B") # upsilon
+     s = replace(s, "\u03CE" => "\u1F7D") # omega
+     s = replace(s, "\u0386" => "\u1FBB") # Alpha
+     s = replace(s, "\u0388" => "\u1FC9") # Epsilon
+     s = replace(s, "\u0389" => "\u1FCB") # Eta
+     s = replace(s, "\u038A" => "\u1FDB") # Iota
+     s = replace(s, "\u038C" => "\u1FF9") # Omicron
+     s = replace(s, "\u038E" => "\u1FEB") # Upsilon
+     s = replace(s, "\u038F" => "\u1FFB") # Omega
+     s
+end
+
+"Pre-process a string of Beta-code, before transcoding it to Unicode. First, correct the order of accented  capital letters to: asterisk + letter + diacriticals. THEN make sure any dialytika+accent combo is ''"
+function preprocessGreek(s::String)
+    # capitals + diacritics first
+    capsRegex = r"\*([)(/\\=]+)([a-zA-Z])"
+    capsFixed = replace(s, capsRegex => s"*\2\1")
+    # pipes: We take advantage of Beta-code's %5 code for "vertical bar"
+    pipesRegex1 = r"\|\|\|"
+    pipes1 = replace(capsFixed, pipesRegex1 => s"")
+    pipesRegex2 = r"\|\|"
+    pipes2 = replace(pipes1, pipesRegex2 => s"%5")
+    pipesRegex3 = r"(\s)\|"
+    pipes3 = replace(pipes2, pipesRegex3 => s"\1%5")
+    # now do dialytika + accent sequence
+    dialytikaRegex = r"([iu])([/\\=])\+"
+    dialytika1 = replace(pipes3, dialytikaRegex => s"\1+\2")
+
+    returnVal = dialytika1
+    returnVal
+    
 end
 
 "Initialize the iterator, `accumulate()`; get the final result, which will be using combining diacritics; then normalize to `:NFKC`, using pre-combined diacritics."
 function transcodeGreek(s)
     pp = preprocessGreek(s)
     preString = accumulate(pp, "", "")
-    Unicode.normalize(preString, :NFKC)
+    normalizedGreek = Unicode.normalize(preString, :NFKC)
+    fixoxia(normalizedGreek)
 end
 
 
