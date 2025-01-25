@@ -1,4 +1,4 @@
-julia> println(printReferenceGuide())
+
 # Reference Guide
 
 For upper-case alphabetic letters, this library accepts upper-case versions of the beta-code equivalent, *e.g.* 'W' → 'Ω', or the `asterisk + lower-case` encoding original to beta-code, *e.g.* '\*w' → 'Ω'.
@@ -46,7 +46,7 @@ Note that medial- and terminal-sigmas will be handled by the transcoding.
 | ̓ | `)` | smooth breathing (Unicode 787) |
 | ̔ | `(` | rough breathing (Unicode 788) |
 | ͂ | `=` | circumflex (Unicode 834) |
-| ͅ | `\|` | iota-subscript (Unicode 837) |
+| ͅ | `|` | iota-subscript (Unicode 837) |
 
 ## Valid Punctuation Characters
 
@@ -58,13 +58,16 @@ Note that medial- and terminal-sigmas will be handled by the transcoding.
 | return | `return` | carriage-return '\n' (Unicode 114) |
 | space | `space` | space (Unicode 115) |
 | " | `"` | quotation mark (Unicode 34) |
-| ' | `'` | apostrophe, mark of elision (Unicode 39) |
 | , | `,` | comma (Unicode 44) |
 | - | `-` | hyphen (Unicode 45) |
 | . | `.` | period (Unicode 46) |
-| : | `:` | colon (Unicode 58) |
 | ; | `;` | Greek question mark (Unicode 59) |
+| [ | `[` | left square bracket (Unicode 91) |
+| ] | `]` | right square bracket (Unicode 93) |
+| · | `:` | colon (Unicode 183) |
 | ʹ | `#` | Greek numeral sign (Unicode 697) |
+| — | `—` | em-dash (Unicode 8212) |
+| ’ | `'` | apostrophe, mark of elision (Unicode 8217) |
 
 ## Valid Editorial and Critical Signs
 
@@ -72,26 +75,51 @@ Note that medial- and terminal-sigmas will be handled by the transcoding.
 
 | Unicode | Beta-Code | Description |
 |---------|-----------|-------------|
-| / | `#17` | obelus (Unicode 47) |
+| ( | `[1` | left parenthesis (Unicode 40) |
+| ) | `]1` | right parenthesis (Unicode 41) |
+| / | `#17` | solidus (Unicode 47) |
 | < | `#18` | reversed diple (Unicode 60) |
 | > | `#15` | diple (Unicode 62) |
+| ? | `%1` | Latin question mark (Unicode 63) |
+| { | `[3` | left curly bracket (Unicode 123) |
+| { | `{` | left curly bracket (Unicode 123) |
+| | | `%5` | long vertical bar (Unicode 124) |
+| } | `}` | right curly bracket (Unicode 125) |
+| } | `]3` | right curly bracket (Unicode 125) |
 | ¶ | `%163` | paragraph sign (Unicode 182) |
+| × | `%43` | metrical anceps (Unicode 215) |
 | ̀ | `#19` | editorial combining grave accent (Unicode 768) |
 | ́ | `#9` | Combining Acute Accent → editorial (Unicode 769) |
 | ̣ | `?` | under-dot (Unicode 803) |
+| ͵ | `#22` | Greek Lower Numeral Sign (Unicode 885) |
 | Ͻ | `#10` | Reversed Lunate Sigma Symbol (Unicode 1021) |
 | Ͼ | `#16` | dotted lunate sigma (Unicode 1022) |
 | Ͽ | `#11` | Reversed Dotted Lunate Sigma Symbol (Unicode 1023) |
-| — | `#12` | obelus (Unicode 8212) |
+| – | `%41` | metrical macron (Unicode 8211) |
+| – | `–` | en-dash (Unicode 8211) |
+| — | `#12` | obelus; em-dash (Unicode 8212) |
+| ‖ | `%17` | double vertical line (Unicode 8214) |
 | † | `%` | dagger/crux (Unicode 8224) |
 | ‡ | `%13` | double dagger (Unicode 8225) |
 | ※ | `#13` | asteriskos (Unicode 8251) |
 | ⁂ | `%158` | asterism (Unicode 8258) |
+| ⁝ | `#74` | tricolon (Unicode 8285) |
 | ⁝ | `#53` | tricolon (Unicode 8285) |
-| ⸎ | `#305` | editorial coronis (Unicode 11790) |
+| ⏑ | `%40` | metrical breve (Unicode 9169) |
+| ⏒ | `%44` | metrical long over short (Unicode 9170) |
+| ⏓ | `%45` | metrical short over long (Unicode 9171) |
+| ⏔ | `%46` | metrical long over two shorts (Unicode 9172) |
+| ⏕ | `%42` | two shorts over one long (Unicode 9173) |
+| ⏖ | `%141` | metrical two shorts joined (Unicode 9174) |
+| ☧ | `#465` | chi rho (Unicode 9767) |
+| ⟦ | `[4` | left white square bracket (Unicode 10214) |
+| ⟧ | `]4` | right white square bracket (Unicode 10215) |
+| ⸎ | `#310` | editorial coronis (Unicode 11790) |
 | ⸏ | `#6` | paragraphos (Unicode 11791) |
 | ⸐ | `#8` | forked paragraphos (Unicode 11792) |
 | ⸖ | `#14` | diple periestigmene (Unicode 11798) |
+| 〈 | `[2` | left-pointing angle bracket (Unicode 12296) |
+| 〉 | `]2` | right-pointing angle bracket (Unicode 12297) |
 
 ## Valid Archaic and Esoteric Characters
 
@@ -120,12 +148,10 @@ The following examples should give an idea of the relationship between beta-code
 
 | Beta-Code | Unicode|
 |-----|-----|
-| `mh=nin a)/eide qea\ *phlhi+a/dew *)axilh=os` | μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος |
-| `ou)lome/nhn, h(\ muri/' *)axaioi=s a)/lge' e)/qhke,` | οὐλομένην, ἣ μυρί' Ἀχαιοῖς ἄλγε' ἔθηκε, |
-| `polla\s d' i)fqi/mous yuxa\s *)/ai+di proi+/ayen` | πολλὰς δ' ἰφθίμους ψυχὰς Ἄϊδι προΐαψεν |
-| `h(rw/wn, au)tou\s de\ e(lw/ria teu=xe ku/nessin` | ἡρώων, αὐτοὺς δὲ ἑλώρια τεῦχε κύνεσσιν |
-| `oi)wnoi=si/ te pa=si, *dio\s d' e)telei/eto boulh/,` | οἰωνοῖσί τε πᾶσι, Διὸς δ' ἐτελείετο βουλή, |
-| `e)c ou(= dh\ ta\ prw=ta diasth/thn e)ri/sante` | ἐξ οὗ δὴ τὰ πρῶτα διαστήτην ἐρίσαντε |
-| `*)atrei+/dhs te a)/nac a)ndrw=n kai\ di=os *)axilleu/s.` | Ἀτρεΐδης τε ἄναξ ἀνδρῶν καὶ δῖος Ἀχιλλεύς. |
-
-julia> 
+| `mh=nin a)/eide qea\ *phlhi+a/dew *)axilh=os` | μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος |
+| `ou)lome/nhn, h(\ muri/' *)axaioi=s a)/lge' e)/qhke,` | οὐλομένην, ἣ μυρί’ Ἀχαιοῖς ἄλγε’ ἔθηκε, |
+| `polla\s d' i)fqi/mous yuxa\s *)/ai+di proi+/ayen` | πολλὰς δ’ ἰφθίμους ψυχὰς Ἄϊδι προΐαψεν |
+| `h(rw/wn, au)tou\s de\ e(lw/ria teu=xe ku/nessin` | ἡρώων, αὐτοὺς δὲ ἑλώρια τεῦχε κύνεσσιν |
+| `oi)wnoi=si/ te pa=si, *dio\s d' e)telei/eto boulh/,` | οἰωνοῖσί τε πᾶσι, Διὸς δ’ ἐτελείετο βουλή, |
+| `e)c ou(= dh\ ta\ prw=ta diasth/thn e)ri/sante` | ἐξ οὗ δὴ τὰ πρῶτα διαστήτην ἐρίσαντε |
+| `*)atrei+/dhs te a)/nac a)ndrw=n kai\ di=os *)axilleu/s.` | Ἀτρεΐδης τε ἄναξ ἀνδρῶν καὶ δῖος Ἀχιλλεύς. |

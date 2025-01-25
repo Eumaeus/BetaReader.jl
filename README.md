@@ -6,6 +6,16 @@ Transliterate Beta Code Greek to Unicode Greek.
 
 ## Using
 
+- `julia> ]` (activate command-mode)
 - `pkg> activate .`
-- `using BetaReader`
-- `BetaReader.transcodeGreek("mh=nin a)/eide")``
+- `julia> using BetaReader`
+- `julia> BetaReader.transcodeGreek("mh=nin a)/eide")`
+
+## Reference
+
+This repository includes a complete reference guide in both Markdown and as a PDF.
+
+To generate a reference guide from the code:
+
+- `julia> usingBetaReader` (if you haven't already done that)
+- `julia> println(BetaReader.printReferenceGuide())`
