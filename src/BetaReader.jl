@@ -5,7 +5,8 @@ using PolytonicGreek
 
 include("Beta.jl")
 include("UCode.jl")
-include("CharDict.jl")
+include("BetaCharDict.jl")
+include("UnicodeCharDict.jl")
 include("CharDocumentation.jl")
 
 export transcodeGreek

@@ -92,10 +92,10 @@
 @test BetaReader.isUC(".") == false
 
 
-@test get(BetaReader.bigLookup,"b","#")[1] == "β"
-@test get(BetaReader.bigLookup,"g","#")[1] == "γ"
-@test get(BetaReader.bigLookup,"&","#") == "#"
-@test get(BetaReader.bigLookup,"","#") == "#"
+@test get(BetaReader.bigBetaLookup,"b","#")[1] == "β"
+@test get(BetaReader.bigBetaLookup,"g","#")[1] == "γ"
+@test get(BetaReader.bigBetaLookup,"&","#") == "#"
+@test get(BetaReader.bigBetaLookup,"","#") == "#"
 
 @test BetaReader.transcodeGreek("mh=nin") == "μῆνιν"
 @test BetaReader.transcodeGreek("Mh=nin") == "Μῆνιν"
@@ -215,8 +215,8 @@
 # Test incomplete and wrong strings
 
 @test BetaReader.transcodeGreek("#45") == "#"
-@test BetaReader.transcodeGreek("v") == "#"
 @test BetaReader.transcodeGreek("@") == "#"
+@test BetaReader.transcodeGreek("j") == "#"
 
 # Arabic Numerals should just pass through
 
@@ -228,7 +228,7 @@
 # Test Documentation Coverage
 
 @test begin
-   gcs = map(collect(BetaReader.bigLookup)) do c
+   gcs = map(collect(BetaReader.bigBetaLookup)) do c
      c[1] 
    end
 

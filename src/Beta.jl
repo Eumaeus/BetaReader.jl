@@ -36,7 +36,7 @@ end
 
 "Returns `true ` if a given character is an archaic form."
 function isArchaic(c)
-    archaic = ["#1","#2","#3","#4","#5", "#400"]
+    archaic = ["#1","#2","#3","#4","#5", "#400", "#711"]
     if (c == "") false
     elseif (c in archaic)
         true
@@ -106,7 +106,7 @@ end
 
 "Returns `true ` if a given character is a beta-code version of any valid lower-case consonant."
 function isValidLCConsonant(c)
-    validLCConsonants = "bgdzqklmncprstfxy"
+    validLCConsonants = "bgdvzqklmncprstfxy"
     if (contains(validLCConsonants,c)) true
     elseif (c == "") false
     else false
@@ -123,7 +123,7 @@ end
 
 "Returns `true ` if a given character is a beta-code version of any valid upper-case consonant."
 function isValidUCConsonant(c)
-    validUCConsonants = "BGDZQKLMNCPRSTFXY"
+    validUCConsonants = "BGDVZQKLMNCPRSTFXY"
     if (c == "") false
     elseif (contains(validUCConsonants,c)) true
     else false
@@ -349,9 +349,9 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
 
 end
 
-"Simply look up `s` in `BetaReader.bigLookup`, in file `CharDict.jl`. If the lookup fails, return the invalid-beta-code sign `#`."
+"Simply look up `s` in `BetaReader.bigBetaLookup`, in file `CharDict.jl`. If the lookup fails, return the invalid-beta-code sign `#`."
 function resolve(s)
-    answer = get(bigLookup, s, ("#", "invalid beta-code"))
+    answer = get(bigBetaLookup, s, ("#", "invalid beta-code"))
     answer[1]
 end
 

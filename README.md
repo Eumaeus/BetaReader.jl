@@ -14,6 +14,14 @@ This library is coordinated with the functionality of the Javascript [BetaReader
 - `julia> using BetaReader`
 - `julia> BetaReader.transcodeGreek("mh=nin a)/eide")`
 
+## Testing
+
+Run the unit tests like this:
+
+- `julia> ]` (activate command-mode)
+- `pkg> activate .`
+- `pkg> test`
+
 ## Coverage & Reference
 
 The official Beta Code manual is [here](https://stephanus.tlg.uci.edu/encoding/BCM.pdf). This library does not intend to cover that in full.

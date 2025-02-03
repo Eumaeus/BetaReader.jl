@@ -26,7 +26,7 @@ function printOneRef( f = isAlphabetic, title = "Alphabetic Characters", notes =
     header = """## Valid $title\n\n$notes\n\n| Unicode | Beta-Code | Description |\n|---------|-----------|-------------|"""
 
     justThese = begin
-        unSorted = collect(filter(k -> f(k.first),bigLookup))
+        unSorted = collect(filter(k -> f(k.first),bigBetaLookup))
         sort(unSorted, by = x -> x.second[1])
     end
 

@@ -1,11 +1,12 @@
 "This is the main table of correspondances."
-bigLookup = Dict([
+bigBetaLookup = Dict([
 
     # consonants
 
     ("b" => ("β", "beta"))
     ("g" => ("γ", "gamma"))
     ("d" => ("δ", "delta"))
+    ("v" => ("ϝ", "digamma"))
     ("z" => ("ζ", "zeta"))
     ("q" => ("θ", "theta"))
     ("k" => ("κ", "kappa"))
@@ -67,6 +68,7 @@ bigLookup = Dict([
     ("#4" =>   ("\u03DE", "glyph variant of archaic koppa")) # Greek Letter Koppa → glyph variant of Greek Letter Koppa
     ("#5" =>   ("\u03E1", "sampi")) # sampi
     ("#400" => ("\u0371", "heta")) # letter heta
+    ("#711" => ("\u03FB", "san")) # letter san
 
     # critical signs
 

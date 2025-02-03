@@ -118,11 +118,19 @@
     # archaic letters
 
     @test BetaReader.transcodeGreek("#1") == "\u03DF" 
+    @test BetaReader.transcodeGreek("*#1") == "\u03DE" 
+    @test BetaReader.transcodeGreek("#5") == "\u03E1"
+    @test BetaReader.transcodeGreek("*#5") == "\u03E0"
+    @test BetaReader.transcodeGreek("v") == "\u03DD" 
+    @test BetaReader.transcodeGreek("V") == "\u03DC" 
+    @test BetaReader.transcodeGreek("*v") == "\u03DC" 
     @test BetaReader.transcodeGreek("#2") == "\u03DB" 
     @test BetaReader.transcodeGreek("#3") == "\u03D9" 
     @test BetaReader.transcodeGreek("#4") == "\u03DE" 
     @test BetaReader.transcodeGreek("#5") == "\u03E1" 
     @test BetaReader.transcodeGreek("#400") == "\u0371" 
+    @test BetaReader.transcodeGreek("#711") == "\u03FB"
+    @test BetaReader.transcodeGreek("*#711") == "\u03FA" 
 
     # critical signs
 
