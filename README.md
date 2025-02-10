@@ -5,9 +5,7 @@ A [Julia](https://julialang.org) library for transliterating Ancient Greek from 
 The Beta Code → Unicode function is coordinated with the functionality of the Javascript [BetaReader.js](https://github.com/Eumaeus/BetaReader.js) library.
 
 
-[![version 2.2](https://img.shields.io/badge/version-2.2-blue.svg)](https://shields.io/) 
-
-[![passing 581 tests](https://img.shields.io/badge/passing-581-tests-green.svg)](https://shields.io/) 
+[![version 2.2](https://img.shields.io/badge/version-2.2-blue.svg)](https://shields.io/) ![passing 581 tests](https://img.shields.io/badge/passing-581-tests-green.svg)](https://shields.io/)
 
 
 
