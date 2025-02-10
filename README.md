@@ -1,13 +1,19 @@
 # BetaReader.jl
 
-Transliterate Ancient Greek from [Beta Code](https://stephanus.tlg.uci.edu/encoding/BCM.pdf) to Unicode, from Unicode to Beta Code, and from either Beta Code or Unicode to a transliteration in Latin characters.
+A [Julia](https://julialang.org) library for transliterating Ancient Greek from [Beta Code](https://stephanus.tlg.uci.edu/encoding/BCM.pdf) to Unicode, from Unicode to Beta Code, and from either Beta Code or Unicode to a transliteration in Latin characters.
 
 The Beta Code → Unicode function is coordinated with the functionality of the Javascript [BetaReader.js](https://github.com/Eumaeus/BetaReader.js) library.
 
 
-[![Generic badge](https://img.shields.io/badge/version-2.2-green.svg)](https://shields.io/)
+[![version 2.2](https://img.shields.io/badge/version-2.2-blue.svg)](https://shields.io/) 
+
+[![passing 581 tests](https://img.shields.io/badge/passing-581-tests-green.svg)](https://shields.io/) 
+
+
 
 ## Using
+
+Having navigated to this respository's directory…
 
 - `julia> ]` (activate command-mode)
 - `pkg> activate .`
