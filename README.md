@@ -7,7 +7,7 @@ The Beta Code → Unicode function is coordinated with the functionality of the 
 
 [![version 2.2](https://img.shields.io/badge/version-2.2-blue.svg)](https://shields.io/) 
 
-[![581 tests](https://img.shields.io/badge/version-2.2-blue.svg)](https://shields.io/) 
+[![581 tests](https://img.shields.io/badge/581-tests-green.svg)](https://shields.io/) 
 
 
 
