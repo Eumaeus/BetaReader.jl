@@ -349,7 +349,7 @@ function accumulate(s::String, acc::String, ret::String, upperCaseThisOne::Bool 
 
 end
 
-"Simply look up `s` in `BetaReader.bigBetaLookup`, in file `CharDict.jl`. If the lookup fails, return the invalid-beta-code sign `#`."
+"Simply look up `s` in `BetaReader.bigBetaLookup`, in file `BetaCharDict.jl`. If the lookup fails, return the invalid-beta-code sign `#`."
 function resolve(s)
     answer = get(bigBetaLookup, s, ("#", "invalid beta-code"))
     answer[1]
@@ -398,7 +398,7 @@ function preprocessGreek(s::String)
 end
 
 "Initialize the iterator, `accumulate()`; get the final result, which will be using combining diacritics; then normalize to `:NFKC`, using pre-combined diacritics."
-function transcodeGreek(s)
+function betaToUnicode(s)
     pp = preprocessGreek(s)
     preString = accumulate(pp, "", "")
     normalizedGreek = Unicode.normalize(preString, :NFKC)

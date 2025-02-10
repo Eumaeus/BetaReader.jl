@@ -97,34 +97,34 @@
 @test get(BetaReader.bigBetaLookup,"&","#") == "#"
 @test get(BetaReader.bigBetaLookup,"","#") == "#"
 
-@test BetaReader.transcodeGreek("mh=nin") == "μῆνιν"
-@test BetaReader.transcodeGreek("Mh=nin") == "Μῆνιν"
-@test BetaReader.transcodeGreek("a)/eide") == "ἄειδε"
-@test BetaReader.transcodeGreek("qea/") == "θεά"
-@test BetaReader.transcodeGreek("Phlhi+a/dew") == "Πηληϊάδεω"
-@test BetaReader.transcodeGreek("A)xilh=os ") == "Ἀχιλῆος "
-@test BetaReader.transcodeGreek("lus-") == "λυσ-"
-@test BetaReader.transcodeGreek("A)xilh=os") == "Ἀχιλῆος" # The stem is "λυσ-"
-@test BetaReader.transcodeGreek("*phlhi+a/dew") == "Πηληϊάδεω"
-@test BetaReader.transcodeGreek("*a)xilh=os ") == "Ἀχιλῆος "
-@test BetaReader.transcodeGreek("") == ""
-@test BetaReader.transcodeGreek("mh=nin a)/eide qea/, *phlhi+a/dew *a)xilh=os ") == "μῆνιν ἄειδε θεά, Πηληϊάδεω Ἀχιλῆος "
+@test BetaReader.betaToUnicode("mh=nin") == "μῆνιν"
+@test BetaReader.betaToUnicode("Mh=nin") == "Μῆνιν"
+@test BetaReader.betaToUnicode("a)/eide") == "ἄειδε"
+@test BetaReader.betaToUnicode("qea/") == "θεά"
+@test BetaReader.betaToUnicode("Phlhi+a/dew") == "Πηληϊάδεω"
+@test BetaReader.betaToUnicode("A)xilh=os ") == "Ἀχιλῆος "
+@test BetaReader.betaToUnicode("lus-") == "λυσ-"
+@test BetaReader.betaToUnicode("A)xilh=os") == "Ἀχιλῆος" # The stem is "λυσ-"
+@test BetaReader.betaToUnicode("*phlhi+a/dew") == "Πηληϊάδεω"
+@test BetaReader.betaToUnicode("*a)xilh=os ") == "Ἀχιλῆος "
+@test BetaReader.betaToUnicode("") == ""
+@test BetaReader.betaToUnicode("mh=nin a)/eide qea/, *phlhi+a/dew *a)xilh=os ") == "μῆνιν ἄειδε θεά, Πηληϊάδεω Ἀχιλῆος "
 
 
-@test BetaReader.transcodeGreek("*a)xilh=os\nou)lome/nhn") == "Ἀχιλῆος\nοὐλομένην"
-@test BetaReader.transcodeGreek("ou)lome/nhn, h(\\ muri/'") == "οὐλομένην, ἣ μυρί\u2019"
-@test BetaReader.transcodeGreek("a)/lge' e)/qhke,") == "ἄλγε’ ἔθηκε,"
-@test BetaReader.transcodeGreek("di=os A)xilleu/s.") == "δῖος Ἀχιλλεύς."
-@test BetaReader.transcodeGreek("cune/hke ma/xesqai;") == "ξυνέηκε μάχεσθαι;"
-@test BetaReader.transcodeGreek("ma/xesqai") == "μάχεσθαι"
-@test BetaReader.transcodeGreek(""""di=os" A)xilleu/s.""") == """"δῖος" Ἀχιλλεύς."""
-@test BetaReader.transcodeGreek(""""di=os" *a)xilleu/s.""") == """"δῖος" Ἀχιλλεύς."""
+@test BetaReader.betaToUnicode("*a)xilh=os\nou)lome/nhn") == "Ἀχιλῆος\nοὐλομένην"
+@test BetaReader.betaToUnicode("ou)lome/nhn, h(\\ muri/'") == "οὐλομένην, ἣ μυρί\u2019"
+@test BetaReader.betaToUnicode("a)/lge' e)/qhke,") == "ἄλγε’ ἔθηκε,"
+@test BetaReader.betaToUnicode("di=os A)xilleu/s.") == "δῖος Ἀχιλλεύς."
+@test BetaReader.betaToUnicode("cune/hke ma/xesqai;") == "ξυνέηκε μάχεσθαι;"
+@test BetaReader.betaToUnicode("ma/xesqai") == "μάχεσθαι"
+@test BetaReader.betaToUnicode(""""di=os" A)xilleu/s.""") == """"δῖος" Ἀχιλλεύς."""
+@test BetaReader.betaToUnicode(""""di=os" *a)xilleu/s.""") == """"δῖος" Ἀχιλλεύς."""
 
-@test BetaReader.transcodeGreek("di=o?s A)xilleu/s.") == "δῖο\u0323ς Ἀχιλλεύς."
+@test BetaReader.betaToUnicode("di=o?s A)xilleu/s.") == "δῖο\u0323ς Ἀχιλλεύς."
 
 # Test upper-casing
-@test BetaReader.transcodeGreek("*sigma") == "Σιγμα"
-@test BetaReader.transcodeGreek("Sigma") == "Σιγμα"
+@test BetaReader.betaToUnicode("*sigma") == "Σιγμα"
+@test BetaReader.betaToUnicode("Sigma") == "Σιγμα"
 
 # Test checking for punctuation
 @test BetaReader.isPunctuation(".")
@@ -136,47 +136,47 @@
 
 
 # Test export
-@test transcodeGreek("di=o?s A)xilleu/s.") == "δῖο\u0323ς Ἀχιλλεύς."
+@test betaToUnicode("di=o?s A)xilleu/s.") == "δῖο\u0323ς Ἀχιλλεύς."
 
 # Test the esoteric "#…" codes
 
-@test transcodeGreek("d# e# a#") == "δ\u02B9 ε\u02B9 α\u02B9" # numeric marker
-@test transcodeGreek("a #1 b") == "α \u03DF β" # lc koppa
-@test transcodeGreek("a *#1 b") == "α \u03DE β" # uc koppa
-@test transcodeGreek("a #11 b") == "α \u03FF β" # Greek Capital Reversed Dotted Lunate Sigma Symbol
-@test transcodeGreek("#12 b") == "\u2014 β" # EM Dash ‣ Obelus
-@test transcodeGreek("*#12 b") == "\u2014 β" # Obelus can't be uppercased, so just deal with it…
-@test transcodeGreek("*#2 b") == "\u03DA β" # uc stigma
-@test transcodeGreek("#2 b") == "\u03DB β" # lc stigma 
-@test transcodeGreek("*#3 b") == "\u03D8 β" # uc archaic koppa
-@test transcodeGreek("#3 b") == "\u03D9 β" # lc archaic koppa
-@test transcodeGreek("#4 b") == "\u03DE β" #  Greek Letter Koppa → glyph variant of Greek Letter Koppa
-@test transcodeGreek("*#5 b") == "\u03E0 β" # uc sampi
-@test transcodeGreek("#5 b") == "\u03E1 β" # lc sampi
-@test transcodeGreek("#6 b") == "\u2E0F β" # paragraphos
-@test transcodeGreek("#8 b") == "\u2E10 β" # Forked Paragraphos
-@test transcodeGreek("#9 b") == "\u0301 β" # Combining Acute Accent → editorial
-@test transcodeGreek("#10 b") == "\u03FD β" # Greek Capital Reversed Lunate Sigma Symbol
+@test betaToUnicode("d# e# a#") == "δ\u02B9 ε\u02B9 α\u02B9" # numeric marker
+@test betaToUnicode("a #1 b") == "α \u03DF β" # lc koppa
+@test betaToUnicode("a *#1 b") == "α \u03DE β" # uc koppa
+@test betaToUnicode("a #11 b") == "α \u03FF β" # Greek Capital Reversed Dotted Lunate Sigma Symbol
+@test betaToUnicode("#12 b") == "\u2014 β" # EM Dash ‣ Obelus
+@test betaToUnicode("*#12 b") == "\u2014 β" # Obelus can't be uppercased, so just deal with it…
+@test betaToUnicode("*#2 b") == "\u03DA β" # uc stigma
+@test betaToUnicode("#2 b") == "\u03DB β" # lc stigma 
+@test betaToUnicode("*#3 b") == "\u03D8 β" # uc archaic koppa
+@test betaToUnicode("#3 b") == "\u03D9 β" # lc archaic koppa
+@test betaToUnicode("#4 b") == "\u03DE β" #  Greek Letter Koppa → glyph variant of Greek Letter Koppa
+@test betaToUnicode("*#5 b") == "\u03E0 β" # uc sampi
+@test betaToUnicode("#5 b") == "\u03E1 β" # lc sampi
+@test betaToUnicode("#6 b") == "\u2E0F β" # paragraphos
+@test betaToUnicode("#8 b") == "\u2E10 β" # Forked Paragraphos
+@test betaToUnicode("#9 b") == "\u0301 β" # Combining Acute Accent → editorial
+@test betaToUnicode("#10 b") == "\u03FD β" # Greek Capital Reversed Lunate Sigma Symbol
 
-@test transcodeGreek("#13 b") == "\u203B β" # ※ Reference Mark ‣ Asteriskos
-@test transcodeGreek("#14 b") == "\u2E16 β" # ⸖ Dotted Right Pointing Angle • Diple Periestigmene
-@test transcodeGreek("#15 b") == "\u003E β" # > Greater-Than Sign ‣ Diple
-@test transcodeGreek("#16 b") == "\u03FE β" # Greek Capital Dotted Lunate Sigma Symbol
-@test transcodeGreek("#17 b") == "\u002F β" # / Solidus ‣ Obelus
-@test transcodeGreek("#18 b") == "\u003C β" # < Less-Than Sign ‣ Reversed Diple
-@test transcodeGreek("#19 b") == "\u0300 β" # ◌̂ Combining Grave Accent → editorial
-@test transcodeGreek("#53 b") == "\u205D β" #  ⁝ tricolon
-@test transcodeGreek("#150 b") == "\u221E β" # infinity
+@test betaToUnicode("#13 b") == "\u203B β" # ※ Reference Mark ‣ Asteriskos
+@test betaToUnicode("#14 b") == "\u2E16 β" # ⸖ Dotted Right Pointing Angle • Diple Periestigmene
+@test betaToUnicode("#15 b") == "\u003E β" # > Greater-Than Sign ‣ Diple
+@test betaToUnicode("#16 b") == "\u03FE β" # Greek Capital Dotted Lunate Sigma Symbol
+@test betaToUnicode("#17 b") == "\u002F β" # / Solidus ‣ Obelus
+@test betaToUnicode("#18 b") == "\u003C β" # < Less-Than Sign ‣ Reversed Diple
+@test betaToUnicode("#19 b") == "\u0300 β" # ◌̂ Combining Grave Accent → editorial
+@test betaToUnicode("#53 b") == "\u205D β" #  ⁝ tricolon
+@test betaToUnicode("#150 b") == "\u221E β" # infinity
 
-@test transcodeGreek("#400 b") == "\u0371 β" # archaic letter heta (lc)
-@test transcodeGreek("*#400 b") == "\u0370 β" # archaic letter heta (uc)
+@test betaToUnicode("#400 b") == "\u0371 β" # archaic letter heta (lc)
+@test betaToUnicode("*#400 b") == "\u0370 β" # archaic letter heta (uc)
 
 
 
-@test transcodeGreek("% b") == "\u2020 β" #  † dagger/crux
-@test transcodeGreek("%13 b") == "\u2021 β" #  ‡ double-dagger
-@test transcodeGreek("%158 b") == "\u2042 β" #  ⁂ asterism
-@test transcodeGreek("%163 b") == "\u00B6 β" # ¶ paragraph sign
+@test betaToUnicode("% b") == "\u2020 β" #  † dagger/crux
+@test betaToUnicode("%13 b") == "\u2021 β" #  ‡ double-dagger
+@test betaToUnicode("%158 b") == "\u2042 β" #  ⁂ asterism
+@test betaToUnicode("%163 b") == "\u00B6 β" # ¶ paragraph sign
 
 
 # Test checking for archaic forms
@@ -214,15 +214,15 @@
 
 # Test incomplete and wrong strings
 
-@test BetaReader.transcodeGreek("#45") == "#"
-@test BetaReader.transcodeGreek("@") == "#"
-@test BetaReader.transcodeGreek("j") == "#"
+@test BetaReader.betaToUnicode("#45") == "#"
+@test BetaReader.betaToUnicode("@") == "#"
+@test BetaReader.betaToUnicode("j") == "#"
 
 # Arabic Numerals should just pass through
 
-@test BetaReader.transcodeGreek("4") == "4"
-@test BetaReader.transcodeGreek("2") == "2"
-@test BetaReader.transcodeGreek("0") == "0"
+@test BetaReader.betaToUnicode("4") == "4"
+@test BetaReader.betaToUnicode("2") == "2"
+@test BetaReader.betaToUnicode("0") == "0"
 
 
 # Test Documentation Coverage
@@ -270,7 +270,7 @@ end
 
 #=
 @test begin
-  BetaReader.ucToBeta("αβγ") == "abg"
+  BetaReader.unicodeToBeta("αβγ") == "abg"
 end
 =#
 
@@ -290,7 +290,7 @@ end
 
 #=
 @test begin
-  testString = BetaReader.ucToBeta("μῆνιν ἄειδε θεά")
+  testString = BetaReader.unicodeToBeta("μῆνιν ἄειδε θεά")
   println(typeof(testString))
   typeof(testString) == AbstractString
 end

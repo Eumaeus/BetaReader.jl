@@ -1,5 +1,11 @@
 # Functions for documenting coverate and equivalances
 
+"Return a map of all correspondences. Why do we need this?"
+function tlMap(uc::String, bc::String, ltu::String, lta::String) 
+    (ucode = uc, bcode = bc, latinUC = ltu, latinAscii = lta)
+end
+
+
 "Generates and returns a Markdown report of all characters represented in the library"
 function printReferenceGuide()
     header = """# Reference Guide\n\n"""

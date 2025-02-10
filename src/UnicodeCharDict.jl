@@ -21,11 +21,12 @@ bigUCLookup = Dict([
     ("χ" => ("x", "chi"))
     ("ψ" => ("y", "psi"))
 
-    # terminal sigma handled separately in Main.jl; the user shouldn't have to care
-
+    # sigmas
     ("σ" => ("s", "sigma"))
+    ("ς" => ("s", "sigma"))
+    ("ϲ" => ("s", "sigma"))
 
-    #vowels
+    # vowels
 
     ("α" => ("a", "alpha"))
     ("ε" => ("e", "epsilon"))
@@ -40,7 +41,8 @@ bigUCLookup = Dict([
     ("\u0314" =>  ("(", "rough breathing"))
     ("\u0313" =>  (")", "smooth breathing"))
     ("\u0300" => ("\\", "grave accent"))
-    ("\u0301" =>  ("/", "acute accent"))
+    ("\u0301" =>  ("/", "acute accent, oxia"))
+    ("\u0344" =>  ("/", "acute accent, tonos"))
     ("\u0342" =>  ("=", "circumflex"))
     ("\u0308" =>  ("+", "diaeresis"))
     ("\u0345" =>  ("|", "iota-subscript"))
@@ -74,22 +76,22 @@ bigUCLookup = Dict([
 
     ("\u2E0F" => ("#6", "paragraphos")) # paragraphos
     ("\u2E10" => ("#8", "forked paragraphos")) # forked paragraphos
-    ("\u0301" => ("#9", "Combining Acute Accent → editorial")) # Combining Acute Accent → editorial
     ("\u03FD" => ("#10", "Reversed Lunate Sigma Symbol")) # Greek Capital Reversed Lunate Sigma Symbol
+    ("\u037B" => ("#10", "Reversed small Lunate Sigma Symbol")) # Greek Small Reversed Lunate Sigma Symbol. Beta doesn't support this.
     ("\u03FF" => ("#11", "Reversed Dotted Lunate Sigma Symbol")) # Greek Capital Reversed Dotted Lunate Sigma Symbol
-    ("\u2014" => ("#12", "obelus; em-dash")) # obelus
+    ("\u037D" => ("#11", "Reversed small Dotted Lunate Sigma Symbol")) # Greek Capital Reversed Dotted Lunate Sigma Symbol (Beta doesn't support this!)
+    ("\u2014" => ("—", "obelus; em-dash")) # obelus
     ("\u203B" => ("#13", "asteriskos")) # ※ Reference Mark ‣ Asteriskos
     ("\u2E16" => ("#14", "diple periestigmene")) # ⸖ Dotted Right Pointing Angle • Diple Periestigmene
     ("\u003E" => ("#15", "diple")) # > Greater-Than Sign ‣ Diple
     ("\u03FE" => ("#16", "dotted lunate sigma")) # Greek Capital Dotted Lunate Sigma Symbol
+    ("\u037C" => ("#16", "dotted lunate sigma")) # Greek Small Dotted Lunate Sigma Symbol
     ("\u002F" => ("#17", "solidus")) # / Solidus ‣ Obelus
     ("\u003C" => ("#18", "reversed diple")) # < Less-Than Sign ‣ Reversed Diple
-    ("\u0300" => ("#19", "editorial combining grave accent")) # ◌̂ Combining Grave Accent → editorial
 
     ("\u0375" => ("#22", "Greek Lower Numeral Sign")) #  Greek Lower Numeral Sign
-    ("⁝" => ("#74", "tricolon")) 
 
-    ("\u205D" => ("#53", "tricolon")) #  ⁝ tricolon
+    ("⁝" => ("#74", "tricolon")) #  ⁝ tricolon
     ("\u221E" => ("#150", "infinity")) # ∞ infinity
     ("\u2E0E" => ("#310", "editorial coronis")) # ⸎ Editorial Coronis 
     ("\u2627" => ("#465", "chi rho")) # ☧ chi-rho
@@ -123,8 +125,6 @@ bigUCLookup = Dict([
     ("\u3009" => ("]2", "right-pointing angle bracket"))
     ("{" => ("[3", "left curly bracket"))
     ("}" => ("]3", "right curly bracket"))
-    ("{" => ("{", "left curly bracket"))
-    ("}" => ("}", "right curly bracket"))
     ("\u27E6" => ("[4", "left white square bracket"))
     ("\u27E7" => ("]4", "right white square bracket"))
 
