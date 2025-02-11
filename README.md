@@ -22,6 +22,7 @@ Having navigated to this respository's directory…
 - `julia> BetaReader.unicodeToLatinUnicode("μῆνιν ἄειδε θεά")`
 - `julia> BetaReader.betacodeToLatinUnicode("mh=nin a)/eide")`
 
+**N.b.** This release is includes breaking changes. The former function `transcodeGreek()` is now `betaToUnicode()`.
 
 ## Testing
 
