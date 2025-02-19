@@ -26,6 +26,27 @@
 
     # Long
 
+   @test begin
+      s = "οὐλομένην, ἣ μυρί᾽ Ἀχαιοῖς ἄλγε᾽ ἔθηκε,"
+      bc = BetaReader.unicodeToBeta(s)
+      bc == "ou)lome/nhn, h(\\ muri/' A)xaioi=s a)/lge' e)/qhke,"
+   end
+
+   @test begin
+      s = "μυρί᾽"
+      bc = BetaReader.unicodeToBeta(s)
+      bc == "muri/'"
+   end
+
+   @test begin
+      s = "οὐλομένην, ἣ μυρί᾽ Ἀχαιοῖς ἄλγε᾽ ἔθηκε,"
+      bctest = "ou)lome/nhn, h(\\ muri/' A)xaioi=s a)/lge' e)/qhke,"
+      bc = BetaReader.unicodeToBeta(s)
+      bctest == bc 
+   end
+   
+
+   
     #=
     @test BetaReader.unicodeToBeta("μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος | οὐλομένην, ἣ μυρί’ Ἀχαιοῖς ἄλγε’ ἔθηκε,") == "mh=nin a)/eide qea\\ *phlhi+a/dew *)axilh=os | ou)lome/nhn, h(\\ muri/' *)axaioi=s a)/lge' e)/qhke," 
     =#
