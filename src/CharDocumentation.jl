@@ -76,7 +76,7 @@ function demos()
 #    demoMD = map( s -> "$s\n\n$(transcodeGreek(s))\n\n", demoStrings)
 
     demoMD = map(demoStrings) do s
-        """| `$s` | $(transcodeGreek(s)) |"""
+        """| `$s` | $(betaToUnicode(s)) |"""
     end
 
     header * join(demoMD, "\n")

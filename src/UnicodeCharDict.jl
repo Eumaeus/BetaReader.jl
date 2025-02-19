@@ -37,7 +37,6 @@ bigUCLookup = Dict([
     ("ω" => ("w", "omega"))
 
     # diacriticals
-
     ("\u0314" =>  ("(", "rough breathing"))
     ("\u0313" =>  (")", "smooth breathing"))
     ("\u0300" => ("\\", "grave accent"))
@@ -60,6 +59,7 @@ bigUCLookup = Dict([
     ("\n" => ("\n", "carriage-return '\\n'"))
     ("\t" => ("\t", "tab character"))
     ("’" =>  ("'", "apostrophe, mark of elision"))
+    ("'" =>  ("'", "apostrophe, mark of elision"))
     ("\"" => ("\"", "quotation mark"))
     ("\u02b9" =>  ("#", "Greek numeral sign")) # greek numeral sign
 

@@ -2,7 +2,9 @@
 
 "Normalize a unicode Greek input"
 function normalizeUCGreek(u)
-    Unicode.normalize(u)    
+    un = Unicode.normalize(u)    
+    # Fix apostrophes!
+    replace(un, "\u1FBD" => "'")
 end
 
 function nfkc_to_nfkd(greek_string::AbstractString)

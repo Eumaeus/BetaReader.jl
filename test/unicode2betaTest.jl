@@ -128,6 +128,7 @@
     @test BetaReader.unicodeToBeta("-") == "-" 
     @test BetaReader.unicodeToBeta("–") == "%41" 
     @test BetaReader.unicodeToBeta("—") == "—" 
+    @test BetaReader.unicodeToBeta("ε᾽") == "e'"
 
     # Greek Numeral Sign
 

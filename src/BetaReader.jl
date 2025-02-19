@@ -14,7 +14,8 @@ include("CharDocumentation.jl")
 
 export betaToUnicode
 export unicodeToBeta
-export printVowels
+export unicodeToLatinUnicode
+export betaicodeToLatinUnicode
 export printReferenceGuide
 
 end # module
