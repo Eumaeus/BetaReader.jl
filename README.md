@@ -2,7 +2,7 @@
 
 A [Julia](https://julialang.org) library for transliterating Ancient Greek from [Beta Code](https://stephanus.tlg.uci.edu/encoding/BCM.pdf) to Unicode, from Unicode to Beta Code, and from either Beta Code or Unicode to a transliteration in Latin characters.
 
-The Beta Code → Unicode function is coordinated with the functionality of the Javascript [BetaReader.js](https://github.com/Eumaeus/BetaReader.js) library.
+The Beta Code → Unicode function is coordinated with the functionality of the Javascript [BetaReader.js](https://github.com/Eumaeus/BetaReader.js) library. (That library handles only the transliteration from Beta Code to Unicode.)
 
 
 [![version 2.2.2](https://img.shields.io/badge/version-2.2-blue.svg)](https://shields.io/) [![582 tests](https://img.shields.io/badge/tests-582-teal.svg)](https://shields.io/)
@@ -19,6 +19,7 @@ Having navigated to this respository's directory…
 - `julia> BetaReader.unicodeToLatinUnicode("μῆνιν ἄειδε θεά")`
 - `julia> BetaReader.betacodeToLatinUnicode("mh=nin a)/eide")`
 
+**N.b.** This release is includes breaking changes. The former function `transcodeGreek()` is now `betaToUnicode()`.
 
 ## Testing
 
